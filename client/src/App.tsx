@@ -1,0 +1,39 @@
+import {CssBaseline} from '@mui/material';
+import {useEffect} from 'react';
+import {BrowserRouter} from 'react-router-dom';
+import AppRouter from './components/AppRouter';
+import {useCheckUserMutation} from './views/login/redux/loginApi';
+import {useAppDispatch, useAppSelector} from './redux/hooks';
+import {getToken, selectUser} from './views/login/redux/userSlice/userSlice';
+import Loader from './components/Loader/Loader';
+import AlertLine from './components/AlertLine/AlertLine';
+import Bar from './components/Bar';
+
+const App = () => {
+  const dispatch = useAppDispatch();
+  const [checkUser] = useCheckUserMutation();
+
+  const {token} = useAppSelector(selectUser);
+
+  useEffect(() => {
+    dispatch(getToken());
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      checkUser(token);
+    }
+  }, [token]);
+
+  return (
+    <BrowserRouter>
+      <CssBaseline />
+      <Loader />
+      <Bar />
+      <AppRouter />
+      <AlertLine />
+    </BrowserRouter>
+  );
+};
+
+export default App;
