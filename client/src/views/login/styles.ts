@@ -33,6 +33,7 @@ export const styles = {
 
   button: {
     color: theme.palette.first.main,
+    mr: 3,
 
     '@media (max-width: 1100px)': {
       mb: 2,

@@ -3,6 +3,11 @@ export enum ERole {
   USER = 'USER',
 }
 
+export enum ELang {
+  BEL,
+  ENG,
+}
+
 export type TRole = `${ERole.ADMIN}` | `${ERole.USER}`;
 export type TEmail = string;
 export type TToken = string;

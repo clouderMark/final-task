@@ -5,8 +5,11 @@ import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {theme} from '../styles/theme';
 import {EPath} from '../types/EPath';
 import {logout, selectUser} from '../views/login/redux/userSlice/userSlice';
+import {selectLang} from './content/redux/langSlice';
+import {content} from './content/content';
 
 const Bar = () => {
+  const {lang} = useAppSelector(selectLang);
   const {isAuth} = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -24,10 +27,10 @@ const Bar = () => {
         <Toolbar sx={{display: 'flex', alignItems: 'flex-end'}}>
           {isAuth ? (
             <Button sx={{m: 1}} onClick={handleLogout}>
-              Logout
+              {content[lang].bar.logout}
             </Button>
           ) : !isLoginPage && !isSignupPage ? (
-            <Button onClick={() => navigate(EPath.Login, {replace: true})}>Login</Button>
+            <Button onClick={() => navigate(EPath.Login, {replace: true})}>{content[lang].bar.login}</Button>
           ) : null}
         </Toolbar>
       </AppBar>

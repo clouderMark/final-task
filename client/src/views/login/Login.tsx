@@ -10,8 +10,11 @@ import {styles} from './styles';
 import {EName, IDefaultValid} from './types';
 import {defaultValid, defaultValue} from './defaultValue';
 import {isValid} from './isValid';
+import {selectLang} from '../../components/content/redux/langSlice';
+import {content} from '../../components/content/content';
 
 const Login = () => {
+  const {lang} = useAppSelector(selectLang);
   const {isAuth} = useAppSelector(selectUser);
   const navigate = useNavigate();
   const isLogin = useLocation().pathname === EPath.Login;
@@ -67,7 +70,7 @@ const Login = () => {
       <Container sx={styles.container}>
         <Card sx={styles.card}>
           <Typography component="h3" sx={{mt: 'auto'}}>
-            {isLogin ? 'Authorization' : 'Registration'}
+            {isLogin ? content[lang].login.title.login : content[lang].login.title.registration}
           </Typography>
           <Box component="form" sx={{display: 'flex', flexDirection: 'column'}} onSubmit={handleSubmit}>
             {!isLogin ? (
@@ -75,7 +78,7 @@ const Login = () => {
                 name={EName.NAME}
                 sx={{mt: 3}}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                placeholder="Enter your name..."
+                placeholder={content[lang].login.placeholder.name}
                 error={valid[EName.NAME] === false}
                 color={valid[EName.NAME] ? 'success' : 'primary'}
               />
@@ -84,7 +87,7 @@ const Login = () => {
               name={EName.EMAIL}
               sx={{mt: 3}}
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-              placeholder="Enter your email..."
+              placeholder={content[lang].login.placeholder.email}
               error={valid[EName.EMAIL] === false}
               color={valid[EName.EMAIL] ? 'success' : 'primary'}
             />
@@ -92,18 +95,20 @@ const Login = () => {
               name={EName.PASSWORD}
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
               sx={{mt: 3}}
-              placeholder="Enter your password..."
+              placeholder={content[lang].login.placeholder.password}
               type="password"
               error={valid[EName.PASSWORD] === false}
               color={valid[EName.PASSWORD] ? 'success' : 'primary'}
             />
             <Box sx={styles.box}>
               <Button type="submit" sx={styles.button} variant="outlined">
-                {isLogin ? 'Enter' : 'Registration'}
+                {isLogin ? content[lang].login.button.login : content[lang].login.button.registration}
               </Button>
               <Typography sx={{mt: 'auto'}}>
-                {isLogin ? "Don't have an account?" : 'Already have an account? '}
-                <Link to={isLogin ? EPath.Signup : EPath.Login}>{isLogin ? ' Register!' : 'Sign in!'}</Link>
+                {isLogin ? content[lang].login.label.login : content[lang].login.label.registration}
+                <Link to={isLogin ? EPath.Signup : EPath.Login}>
+                  {isLogin ? content[lang].login.link.login : content[lang].login.link.registration}
+                </Link>
               </Typography>
             </Box>
           </Box>
