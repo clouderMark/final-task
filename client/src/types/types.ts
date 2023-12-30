@@ -8,6 +8,11 @@ export enum ELang {
   ENG,
 }
 
+export enum ETheme {
+  DARK = 'dark',
+  LIGHT = 'main',
+}
+
 export type TRole = `${ERole.ADMIN}` | `${ERole.USER}`;
 export type TEmail = string;
 export type TToken = string;

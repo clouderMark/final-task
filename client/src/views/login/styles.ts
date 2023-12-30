@@ -1,5 +1,3 @@
-import {theme} from '../../styles/theme';
-
 export const styles = {
   container: {
     display: 'flex',
@@ -32,7 +30,6 @@ export const styles = {
   },
 
   button: {
-    color: theme.palette.first.main,
     mr: 3,
 
     '@media (max-width: 1100px)': {

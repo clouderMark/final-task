@@ -12,8 +12,11 @@ import {defaultValid, defaultValue} from './defaultValue';
 import {isValid} from './isValid';
 import {selectLang} from '../../components/content/redux/langSlice';
 import {content} from '../../components/content/content';
+import {selectTheme} from '../../styles/themeSlice/themeSlice';
+import {theme} from '../../styles/theme';
 
 const Login = () => {
+  const {type} = useAppSelector(selectTheme);
   const {lang} = useAppSelector(selectLang);
   const {isAuth} = useAppSelector(selectUser);
   const navigate = useNavigate();
@@ -68,11 +71,25 @@ const Login = () => {
   return (
     <>
       <Container sx={styles.container}>
-        <Card sx={styles.card}>
+        <Card sx={[styles.card, {backgroundColor: theme.palette.first[type]}]}>
           <Typography component="h3" sx={{mt: 'auto'}}>
             {isLogin ? content[lang].login.title.login : content[lang].login.title.registration}
           </Typography>
-          <Box component="form" sx={{display: 'flex', flexDirection: 'column'}} onSubmit={handleSubmit}>
+          <Box
+            component="form"
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              input: {
+                '&::placeholder': {
+                  color: theme.palette.third[type],
+                },
+                color: theme.palette.third[type],
+                background: theme.palette.second[type],
+              },
+            }}
+            onSubmit={handleSubmit}
+          >
             {!isLogin ? (
               <TextField
                 name={EName.NAME}
@@ -101,10 +118,14 @@ const Login = () => {
               color={valid[EName.PASSWORD] ? 'success' : 'primary'}
             />
             <Box sx={styles.box}>
-              <Button type="submit" sx={styles.button} variant="outlined">
+              <Button
+                type="submit"
+                sx={[styles.button, {color: theme.palette.third[type], background: theme.palette.second[type]}]}
+                variant="outlined"
+              >
                 {isLogin ? content[lang].login.button.login : content[lang].login.button.registration}
               </Button>
-              <Typography sx={{mt: 'auto'}}>
+              <Typography sx={{mt: 'auto', color: theme.palette.third[type]}}>
                 {isLogin ? content[lang].login.label.login : content[lang].login.label.registration}
                 <Link to={isLogin ? EPath.Signup : EPath.Login}>
                   {isLogin ? content[lang].login.link.login : content[lang].login.link.registration}

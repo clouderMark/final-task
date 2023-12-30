@@ -1,18 +1,16 @@
-import {createTheme, PaletteColorOptions, PaletteColor, lighten} from '@mui/material/styles';
+import {createTheme, PaletteColorOptions, PaletteColor} from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
   interface PaletteOptions {
     first?: PaletteColorOptions;
     second?: PaletteColorOptions;
     third?: PaletteColorOptions;
-    fourth?: PaletteColorOptions;
   }
 
   interface Palette {
     first: PaletteColor;
     second: PaletteColor;
     third: PaletteColor;
-    fourth: PaletteColor;
   }
 
   interface ButtonPropsColorOverrides {
@@ -27,27 +25,22 @@ declare module '@mui/material/Button' {
     first: true;
     second: true;
     third: true;
-    fourth: true;
   }
 }
 
 const globalTheme = createTheme({
   palette: {
     first: {
-      main: '#008f38',
-      dark: '#007146',
+      main: '#f6f8fa', // header
+      dark: '#020409',
     },
     second: {
-      main: '#a3d8dd',
+      main: '#ffffff', // bg
+      dark: '#0e1116',
     },
     third: {
-      main: '#fff',
-      light: 'rgba(255, 255, 255, .6)',
-      dark: 'rgba(255, 255, 255, .3)',
-    },
-    fourth: {
-      main: '#6f6f6f',
-      light: lighten('#6f6f6f', 0.3),
+      main: '#25282e', // color
+      dark: '#e7edf2',
     },
   },
 });
@@ -60,21 +53,18 @@ export const theme = createTheme({
     },
     second: {
       main: globalTheme.palette.second.main,
+      dark: globalTheme.palette.second.dark,
     },
     third: {
       main: globalTheme.palette.third.main,
-      light: globalTheme.palette.third.light,
-    },
-    fourth: {
-      main: globalTheme.palette.fourth.main,
-      light: globalTheme.palette.fourth.light,
+      dark: globalTheme.palette.third.dark,
     },
   },
-  typography: {
-    allVariants: {
-      color: globalTheme.palette.fourth.main,
-    },
-  },
+  // typography: {
+  //   allVariants: {
+  //     color: globalTheme.palette.third.main,
+  //   },
+  // },
   components: {
     MuiButton: {
       styleOverrides: {
@@ -88,7 +78,7 @@ export const theme = createTheme({
           textTransform: 'none',
           '&:hover': {
             backgroundColor: 'trasparent',
-            color: 'inherit',
+            // color: 'inherit',
           },
         },
       },
@@ -96,7 +86,7 @@ export const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          maxWidth: '1400px',
+          // maxWidth: '1400px',
           boxShadow: 'none',
           position: 'sticky',
         },
@@ -107,7 +97,6 @@ export const theme = createTheme({
         root: {
           padding: '0 !important',
           display: 'flex',
-          flexDirection: 'column',
         },
       },
     },

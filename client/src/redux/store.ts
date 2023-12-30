@@ -4,6 +4,7 @@ import {alertSlice} from '../components/AlertLine/redux/alertSlice';
 import {loaderSlice} from '../components/Loader/redux/loaderSlice';
 import {loginApi} from '../views/login/redux/loginApi';
 import {langSlice} from '../components/content/redux/langSlice';
+import {themeSlice} from '../styles/themeSlice/themeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     alert: alertSlice.reducer,
     loader: loaderSlice.reducer,
     lang: langSlice.reducer,
+    theme: themeSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
