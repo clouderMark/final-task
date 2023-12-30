@@ -1,13 +1,14 @@
 import * as React from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {AppBar, Toolbar, Button, Box, IconButton} from '@mui/material';
+import LanguageIcon from '@mui/icons-material/Language';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {theme} from '../styles/theme';
 import {EPath} from '../types/EPath';
 import {logout, selectUser} from '../views/login/redux/userSlice/userSlice';
-import {selectLang} from './content/redux/langSlice';
+import {changeLang, selectLang} from './content/redux/langSlice';
 import {content} from './content/content';
 import {changeColorTheme, selectTheme} from '../styles/themeSlice/themeSlice';
 import {ETheme} from '../types/types';
@@ -39,6 +40,9 @@ const Bar = () => {
               {content[lang].bar.login}
             </Button>
           ) : null}
+          <IconButton sx={{m: 1, color: theme.palette.third[type]}} onClick={() => dispatch(changeLang())}>
+            <LanguageIcon />
+          </IconButton>
           <IconButton sx={{m: 1, color: theme.palette.third[type]}} onClick={() => dispatch(changeColorTheme())}>
             {type === ETheme.LIGHT ? <Brightness4Icon /> : <Brightness7Icon />}
           </IconButton>
