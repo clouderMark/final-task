@@ -6,4 +6,5 @@ export const initialState: IInitialState = {
   isAuth: false,
   isAdmin: false,
   token: null,
+  name: null,
 };

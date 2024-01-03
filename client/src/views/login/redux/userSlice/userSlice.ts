@@ -22,6 +22,7 @@ export const userSlice = createSlice({
       state.isAuth = true;
       state.isAdmin = user.role === ERole.ADMIN;
       state.token = token;
+      state.name = user.name;
     },
     logout: () => {
       localStorage.removeItem(EToken.TOKEN);
@@ -49,6 +50,7 @@ export const userSlice = createSlice({
         state.isAuth = true;
         state.isAdmin = user.role === ERole.ADMIN;
         state.token = token;
+        state.name = user.name;
       })
       .addMatcher(loginApi.endpoints.checkUser.matchRejected, () => {
         localStorage.removeItem(EToken.TOKEN);
@@ -67,6 +69,7 @@ export const userSlice = createSlice({
         state.isAuth = true;
         state.isAdmin = user.role === ERole.ADMIN;
         state.token = token;
+        state.name = user.name;
       })
       .addMatcher(loginApi.endpoints.signupUser.matchFulfilled, (state, {payload}) => {
         const {token} = payload;
@@ -80,6 +83,7 @@ export const userSlice = createSlice({
         state.isAuth = true;
         state.isAdmin = user.role === ERole.ADMIN;
         state.token = token;
+        state.name = user.name;
       });
   },
 });

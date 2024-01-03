@@ -21,6 +21,8 @@ export enum EField {
   ROLE = 'role',
   AUTH = 'auth',
   TOKEN = 'token',
+  ISAUTH = 'isAuth',
+  ISADMIN = 'isAdmin',
 }
 
 export type TRole = `${ERole.ADMIN}` | `${ERole.USER}`;
@@ -28,7 +30,7 @@ export type TEmail = string;
 export type TToken = string;
 export type TId = number;
 type TPass = string;
-type TName = string;
+export type TName = string;
 
 export interface ICustomError {
   data: {

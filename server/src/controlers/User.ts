@@ -1,12 +1,12 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {NextFunction, Request, Response} from 'express';
-import {ERole, IAuthRequest, TEmail, TId, TRole} from '../types/types';
+import {ERole, IAuthRequest, TEmail, TId, TName, TRole} from '../types/types';
 import UserModel from '../models/User';
 import AppError from '../errors/AppError';
 
-const makeJwt = (id: TId, email: TEmail, role: TRole) =>
-  jwt.sign({id, email, role}, process.env.SECRET_KEY!, {expiresIn: '24h'});
+const makeJwt = (id: TId, email: TEmail, role: TRole, name: TName) =>
+  jwt.sign({id, email, role, name}, process.env.SECRET_KEY!, {expiresIn: '24h'});
 
 class User {
   async signup(req: Request, res: Response, next: NextFunction) {
@@ -23,7 +23,7 @@ class User {
 
       const hash = await bcrypt.hash(password, 5);
       const user = await UserModel.create({email, password: hash, role, name});
-      const token = makeJwt(user.id!, user.email, user.role);
+      const token = makeJwt(user.id!, user.email, user.role, user.name);
 
       return res.json({token});
     } catch (e: unknown) {
@@ -43,7 +43,7 @@ class User {
         throw new Error('Указан неверный пароль');
       }
 
-      const token = makeJwt(user.id!, user.email, user.role);
+      const token = makeJwt(user.id!, user.email, user.role, user.name);
 
       return res.json({token});
     } catch (e: unknown) {
@@ -57,17 +57,21 @@ class User {
     try {
       if (req.auth?.id && req.auth?.email && req.auth?.role) {
         const {id, email, role} = req.auth;
-        const token = makeJwt(id, email, role);
+        let token: string;
 
-        if (token) {
+        if (id && email && role) {
           const user = await UserModel.getByEmail(email);
 
           if (!user) {
             throw new Error('Пользователь не найден в базе данных');
+          } else {
+            token = makeJwt(id, email, role, user.name);
+
+            return res.json({token});
           }
         }
 
-        return res.json({token});
+        throw new Error('Не указан email, id или role');
       }
     } catch (e: unknown) {
       if (e instanceof Error) {
