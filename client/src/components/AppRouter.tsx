@@ -4,6 +4,7 @@ import {useAppSelector} from '../redux/hooks';
 import {selectUser} from '../views/login/redux/userSlice/userSlice';
 import Login from '../views/login/Login';
 import Main from '../views/Main';
+import AdminUsers from '../views/AdminUsers';
 
 enum ERoute {
   Path = 'path',
@@ -23,7 +24,7 @@ const publicRoutes: IRoute[] = [
 
 const authRoutes: IRoute[] = [{[ERoute.Path]: EPath.Main, [ERoute.Component]: Main}];
 
-const adminRoutes: IRoute[] = [];
+const adminRoutes: IRoute[] = [{[ERoute.Path]: EPath.AdminUsers, [ERoute.Component]: AdminUsers}];
 
 const AppRouter = () => {
   const {isAuth, isAdmin} = useAppSelector(selectUser);

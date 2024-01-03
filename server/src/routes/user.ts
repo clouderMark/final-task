@@ -15,6 +15,7 @@ router.post('/create', authMiddleware, adminMiddleware, UserController.create);
 router.put('/update/:id([0-9]+)', authMiddleware, adminMiddleware, UserController.update);
 router.delete('/delete/:id([0-9]+)', authMiddleware, adminMiddleware, UserController.delete);
 
-router.delete('/changerole/:id([0-9]+)', authMiddleware, adminMiddleware, UserController.changeRole);
+router.put('/changerole/:id([0-9]+)', authMiddleware, adminMiddleware, UserController.changeRole);
+router.put('/changestatus/:id([0-9]+)', authMiddleware, adminMiddleware, UserController.changeStatus);
 
 export default router;

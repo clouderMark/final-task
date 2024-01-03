@@ -10,6 +10,7 @@ const User = sequelize.define<IUserModel>('User', {
   [EField.PASSWORD]: {type: DataTypes.STRING},
   [EField.NAME]: {type: DataTypes.STRING},
   [EField.ROLE]: {type: DataTypes.STRING, defaultValue: ERole.USER},
+  [EField.ISBLOCKED]: {type: DataTypes.BOOLEAN, defaultValue: false},
 }, {});
 
 export {User};

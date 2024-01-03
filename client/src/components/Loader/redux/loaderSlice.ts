@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import type {RootState} from '../../../redux/store';
 import {loginApi} from '../../../views/login/redux/loginApi';
 import {initialState} from './initialState';
+import {userApi} from '../../../redux/userApi';
 
 export const loaderSlice = createSlice({
   name: 'loader',
@@ -23,6 +24,24 @@ export const loaderSlice = createSlice({
         state.isOpen = false;
       })
       .addMatcher(loginApi.endpoints.checkUser.matchRejected, (state) => {
+        state.isOpen = false;
+      })
+      .addMatcher(userApi.endpoints.getAllUsers.matchPending, (state) => {
+        state.isOpen = true;
+      })
+      .addMatcher(userApi.endpoints.getAllUsers.matchFulfilled, (state) => {
+        state.isOpen = false;
+      })
+      .addMatcher(userApi.endpoints.getAllUsers.matchRejected, (state) => {
+        state.isOpen = false;
+      })
+      .addMatcher(userApi.endpoints.changeUserRole.matchPending, (state) => {
+        state.isOpen = true;
+      })
+      .addMatcher(userApi.endpoints.changeUserRole.matchFulfilled, (state) => {
+        state.isOpen = false;
+      })
+      .addMatcher(userApi.endpoints.changeUserRole.matchRejected, (state) => {
         state.isOpen = false;
       });
   },

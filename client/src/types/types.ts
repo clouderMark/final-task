@@ -23,6 +23,7 @@ export enum EField {
   TOKEN = 'token',
   ISAUTH = 'isAuth',
   ISADMIN = 'isAdmin',
+  ISBLOCKED = 'isBlocked',
 }
 
 export type TRole = `${ERole.ADMIN}` | `${ERole.USER}`;
@@ -50,6 +51,10 @@ interface IName {
   [EField.NAME]: TName;
 }
 
+interface IIsBlocked {
+  [EField.ISBLOCKED]: boolean;
+}
+
 export interface ILogin extends IEmail, IId {
   [EField.PASSWORD]: TPass;
 }
@@ -68,10 +73,8 @@ interface IRole {
   [EField.ROLE]: TRole;
 }
 
-export interface IUser extends IId, IEmail, IRole, IName {}
+export interface IUser extends IId, IRole, IName, IIsBlocked {}
 
-export interface IPublickUser extends IId, IRole, IName {}
-
-export interface IChangeRole extends IToken {
+export interface IChangeUser extends IToken {
   [EField.ID]: TId;
 }

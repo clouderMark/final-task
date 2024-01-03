@@ -3,4 +3,5 @@ export enum EPath {
   Signup = '/signup',
   NotFound = '*',
   Main = '/',
+  AdminUsers = '/admin/users',
 }

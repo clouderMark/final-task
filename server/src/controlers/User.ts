@@ -10,7 +10,7 @@ const makeJwt = (id: TId, email: TEmail, role: TRole, name: TName) =>
 
 class User {
   async signup(req: Request, res: Response, next: NextFunction) {
-    const {email, password, role = ERole.USER, name} = req.body;
+    const {email, password, role = ERole.USER, name, isBlocked = false} = req.body;
 
     try {
       if (!email || !password || !name) {
@@ -22,7 +22,7 @@ class User {
       }
 
       const hash = await bcrypt.hash(password, 5);
-      const user = await UserModel.create({email, password: hash, role, name});
+      const user = await UserModel.create({email, password: hash, role, name, isBlocked});
       const token = makeJwt(user.id!, user.email, user.role, user.name);
 
       return res.json({token});
@@ -65,7 +65,7 @@ class User {
           if (!user) {
             throw new Error('Пользователь не найден в базе данных');
           } else {
-            token = makeJwt(id, email, role, user.name);
+            token = makeJwt(id, user.email, user.role, user.name);
 
             return res.json({token});
           }
@@ -111,7 +111,7 @@ class User {
   }
 
   async create(req: Request, res: Response, next: NextFunction) {
-    const {email, password, role = ERole.USER, name} = req.body;
+    const {email, password, role = ERole.USER, name, isBlocked = false} = req.body;
 
     try {
       if (!email || !password || !name) {
@@ -123,7 +123,7 @@ class User {
       }
 
       const hash = await bcrypt.hash(password, 5);
-      const user = await UserModel.create({email, password: hash, role, name});
+      const user = await UserModel.create({email, password: hash, role, name, isBlocked});
 
       res.json(user);
     } catch (e: unknown) {
@@ -145,7 +145,7 @@ class User {
         throw new Error('Нет данных для обновления');
       }
 
-      const {email, role, name} = req.body;
+      const {email, role = ERole.USER, name, isBlocked = false} = req.body;
       let {password} = req.body;
 
       if (role && !(ERole.USER, ERole.ADMIN).includes(role)) {
@@ -156,7 +156,7 @@ class User {
         password = await bcrypt.hash(password, 5);
       }
 
-      const user = await UserModel.update(+id, {email, password, role, name});
+      const user = await UserModel.update(+id, {email, password, role, name, isBlocked});
 
       res.json(user);
     } catch (e: unknown) {
@@ -186,13 +186,31 @@ class User {
 
   async changeRole(req: Request, res: Response, next: NextFunction) {
     try {
-      const {id} = req.body;
+      const {id} = req.params;
 
       if (!id) {
-        throw new Error('User IDs not specified');
+        throw new Error('User ID not specified');
       }
 
-      const users = await UserModel.changeRole(id);
+      const users = await UserModel.changeRole(+id);
+
+      res.json(users);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        next(AppError.badRequest(e.message));
+      }
+    }
+  }
+
+  async changeStatus(req: Request, res: Response, next: NextFunction) {
+    try {
+      const {id} = req.params;
+
+      if (!id) {
+        throw new Error('User ID not specified');
+      }
+
+      const users = await UserModel.changeStatus(+id);
 
       res.json(users);
     } catch (e: unknown) {

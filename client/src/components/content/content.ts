@@ -29,7 +29,19 @@ export const content: IContent = {
     bar: {
       login: 'Login',
       logout: 'Logout',
+      adminUsers: 'Users',
     },
+    adminUser: {
+      blocked: 'blocked',
+      active: 'active',
+      statusIs: 'status is',
+      roleIs: 'role is',
+      userName: 'user name',
+      changeStatus: 'change status',
+      changeRole: 'change role',
+    },
+    admin: 'Admin',
+    user: 'User',
   },
   [ELang.BEL]: {
     login: {
@@ -58,6 +70,18 @@ export const content: IContent = {
     bar: {
       login: 'Увайсці',
       logout: 'Выйсці',
+      adminUsers: 'Карыстальнікі',
     },
+    adminUser: {
+      blocked: 'заблакаваны',
+      active: 'актыўны',
+      statusIs: 'статус',
+      roleIs: 'роль',
+      userName: 'імя карыстальніка',
+      changeStatus: 'змяніць статус',
+      changeRole: 'змяніць роль',
+    },
+    admin: 'Адмін',
+    user: 'Карыстальнік',
   },
 };

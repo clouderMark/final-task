@@ -3,7 +3,7 @@ import {User as UserMapping} from './mapping';
 // import AppError from '../errors/AppError.js';
 
 export const userAttributes = {
-  attributes: [EField.ID, EField.NAME, EField.ROLE],
+  attributes: [EField.ID, EField.NAME, EField.ROLE, EField.ISBLOCKED],
 };
 
 class User {
@@ -80,6 +80,19 @@ class User {
     }
 
     user.role = user.role === ERole.USER ? ERole.ADMIN : ERole.USER;
+    await user.save();
+
+    return user;
+  }
+
+  async changeStatus(id: TId) {
+    const user = await UserMapping.findByPk(id);
+
+    if (!user) {
+      throw new Error('Пользователь не найдена в БД');
+    }
+
+    user.isBlocked = !user.isBlocked;
     await user.save();
 
     return user;

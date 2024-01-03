@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery, BaseQueryFn, FetchArgs} from '@reduxjs/toolkit/query/react';
-import {IChangeRole, ICustomError, IPublickUser, IToken, IUser} from '../types/types';
+import {IChangeUser, ICustomError, IUser, IToken} from '../types/types';
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -10,22 +10,28 @@ export const userApi = createApi({
     credentials: 'include',
   }) as BaseQueryFn<string | FetchArgs, unknown, ICustomError, {}>,
   endpoints: (builder) => ({
-    changeUserRole: builder.mutation<IUser, IChangeRole>({
+    changeUserRole: builder.mutation<IUser, IChangeUser>({
       query: (data) => ({
         url: `/changerole/${data.id}`,
         method: 'PUT',
-        body: {...data},
         headers: {authorization: `Bearer ${data.token}`},
       }),
     }),
-    getAllUsers: builder.mutation<IPublickUser[], IToken>({
+    changeUserStatus: builder.mutation<IUser, IChangeUser>({
+      query: (data) => ({
+        url: `/changestatus/${data.id}`,
+        method: 'PUT',
+        headers: {authorization: `Bearer ${data.token}`},
+      }),
+    }),
+    getAllUsers: builder.mutation<IUser[], IToken>({
       query: (data) => ({
         url: '/getall',
-        method: 'PUT',
+        method: 'GET',
         headers: {authorization: `Bearer ${data.token}`},
       }),
     }),
   }),
 });
 
-export const {useChangeUserRoleMutation} = userApi;
+export const {useChangeUserRoleMutation, useGetAllUsersMutation, useChangeUserStatusMutation} = userApi;

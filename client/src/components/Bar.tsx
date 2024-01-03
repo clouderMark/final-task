@@ -17,7 +17,7 @@ import {ETheme} from '../types/types';
 const Bar = () => {
   const {type} = useAppSelector(selectTheme);
   const {lang} = useAppSelector(selectLang);
-  const {isAuth, name} = useAppSelector(selectUser);
+  const {isAuth, name, isAdmin} = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isLoginPage = useLocation().pathname === EPath.Login;
@@ -31,6 +31,14 @@ const Bar = () => {
   return (
     <AppBar sx={{backgroundColor: theme.palette.first[type], borderBottom: `0.5px solid ${theme.palette.third[type]}`}}>
       <Toolbar sx={{}}>
+        {isAdmin ? (
+          <Button
+            onClick={() => navigate(EPath.AdminUsers, {replace: true})}
+            sx={{m: 1, color: theme.palette.third[type]}}
+          >
+            {content[lang].bar.adminUsers}
+          </Button>
+        ) : null}
         <Box sx={{ml: 'auto'}}>
           {isAuth ? (
             <Button
