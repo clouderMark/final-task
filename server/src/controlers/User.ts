@@ -10,11 +10,11 @@ const makeJwt = (id: TId, email: TEmail, role: TRole) =>
 
 class User {
   async signup(req: Request, res: Response, next: NextFunction) {
-    const {email, password, role = ERole.USER} = req.body;
+    const {email, password, role = ERole.USER, name} = req.body;
 
     try {
-      if (!email || !password) {
-        throw new Error('Пустой email или пароль');
+      if (!email || !password || !name) {
+        throw new Error('Пустой email, пароль или name');
       }
 
       if (role !== ERole.USER) {
@@ -22,7 +22,7 @@ class User {
       }
 
       const hash = await bcrypt.hash(password, 5);
-      const user = await UserModel.create({email, password: hash, role});
+      const user = await UserModel.create({email, password: hash, role, name});
       const token = makeJwt(user.id!, user.email, user.role);
 
       return res.json({token});
@@ -58,6 +58,14 @@ class User {
       if (req.auth?.id && req.auth?.email && req.auth?.role) {
         const {id, email, role} = req.auth;
         const token = makeJwt(id, email, role);
+
+        if (token) {
+          const user = await UserModel.getByEmail(email);
+
+          if (!user) {
+            throw new Error('Пользователь не найден в базе данных');
+          }
+        }
 
         return res.json({token});
       }
@@ -99,11 +107,11 @@ class User {
   }
 
   async create(req: Request, res: Response, next: NextFunction) {
-    const {email, password, role = ERole.USER} = req.body;
+    const {email, password, role = ERole.USER, name} = req.body;
 
     try {
-      if (!email || !password) {
-        throw new Error('Пустой email или пароль');
+      if (!email || !password || !name) {
+        throw new Error('Пустой email, пароль или name');
       }
 
       if (![ERole.USER, ERole.ADMIN].includes(role)) {
@@ -111,7 +119,7 @@ class User {
       }
 
       const hash = await bcrypt.hash(password, 5);
-      const user = await UserModel.create({email, password: hash, role});
+      const user = await UserModel.create({email, password: hash, role, name});
 
       res.json(user);
     } catch (e: unknown) {
@@ -133,7 +141,7 @@ class User {
         throw new Error('Нет данных для обновления');
       }
 
-      const {email, role} = req.body;
+      const {email, role, name} = req.body;
       let {password} = req.body;
 
       if (role && !(ERole.USER, ERole.ADMIN).includes(role)) {
@@ -144,7 +152,7 @@ class User {
         password = await bcrypt.hash(password, 5);
       }
 
-      const user = await UserModel.update(+id, {email, password, role});
+      const user = await UserModel.update(+id, {email, password, role, name});
 
       res.json(user);
     } catch (e: unknown) {
@@ -165,6 +173,24 @@ class User {
       const user = await UserModel.delete(+id);
 
       res.json(user);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        next(AppError.badRequest(e.message));
+      }
+    }
+  }
+
+  async changeRole(req: Request, res: Response, next: NextFunction) {
+    try {
+      const {id} = req.body;
+
+      if (!id) {
+        throw new Error('User IDs not specified');
+      }
+
+      const users = await UserModel.changeRole(id);
+
+      res.json(users);
     } catch (e: unknown) {
       if (e instanceof Error) {
         next(AppError.badRequest(e.message));

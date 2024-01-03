@@ -1,21 +1,15 @@
-import database, {CreationOptional, InferAttributes, InferCreationAttributes, Model} from 'sequelize';
-import {ERole, TEmail, TId, TRole} from '../types/types';
+import database from 'sequelize';
+import {ERole, IUserModel, EField} from '../types/types';
 import sequelize from '../sequelize';
 
 const {DataTypes} = database;
 
-interface UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
-  id: CreationOptional<TId>;
-  email: TEmail;
-  password: string;
-  role: TRole;
-}
-
-const User = sequelize.define<UserModel>('User', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  email: {type: DataTypes.STRING, unique: true},
-  password: {type: DataTypes.STRING},
-  role: {type: DataTypes.STRING, defaultValue: ERole.USER},
+const User = sequelize.define<IUserModel>('User', {
+  [EField.ID]: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+  [EField.EMAIL]: {type: DataTypes.STRING, unique: true},
+  [EField.PASSWORD]: {type: DataTypes.STRING},
+  [EField.NAME]: {type: DataTypes.STRING},
+  [EField.ROLE]: {type: DataTypes.STRING, defaultValue: ERole.USER},
 }, {});
 
 export {User};

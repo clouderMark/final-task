@@ -13,11 +13,22 @@ export enum ETheme {
   LIGHT = 'main',
 }
 
+export enum EField {
+  ID = 'id',
+  EMAIL = 'email',
+  PASSWORD = 'password',
+  NAME = 'name',
+  ROLE = 'role',
+  AUTH = 'auth',
+  TOKEN = 'token',
+}
+
 export type TRole = `${ERole.ADMIN}` | `${ERole.USER}`;
 export type TEmail = string;
 export type TToken = string;
 export type TId = number;
 type TPass = string;
+type TName = string;
 
 export interface ICustomError {
   data: {
@@ -26,22 +37,39 @@ export interface ICustomError {
   status: number;
 }
 
-interface IId {
-  id?: TId;
+export interface IId {
+  [EField.ID]?: TId;
 }
 interface IEmail {
-  email: TEmail;
+  [EField.EMAIL]: TEmail;
 }
+
+interface IName {
+  [EField.NAME]: TName;
+}
+
 export interface ILogin extends IEmail, IId {
-  password: TPass;
+  [EField.PASSWORD]: TPass;
 }
 export interface IToken {
-  token: TToken;
+  [EField.TOKEN]: TToken;
 }
 export interface ISignup extends ILogin {
-  name: string;
+  [EField.NAME]: string;
 }
 
 export interface IObject {
   [key: string]: string;
+}
+
+interface IRole {
+  [EField.ROLE]: TRole;
+}
+
+export interface IUser extends IId, IEmail, IRole, IName {}
+
+export interface IPublickUser extends IId, IRole, IName {}
+
+export interface IChangeRole extends IToken {
+  [EField.ID]: TId;
 }

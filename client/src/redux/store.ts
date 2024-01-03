@@ -5,6 +5,7 @@ import {loaderSlice} from '../components/Loader/redux/loaderSlice';
 import {loginApi} from '../views/login/redux/loginApi';
 import {langSlice} from '../components/content/redux/langSlice';
 import {themeSlice} from '../styles/themeSlice/themeSlice';
+import {userApi} from './userApi';
 
 export const store = configureStore({
   reducer: {
@@ -14,11 +15,14 @@ export const store = configureStore({
     loader: loaderSlice.reducer,
     lang: langSlice.reducer,
     theme: themeSlice.reducer,
+    [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(loginApi.middleware),
+    })
+      .concat(loginApi.middleware)
+      .concat(userApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
