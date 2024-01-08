@@ -1,10 +1,4 @@
 export const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    mt: 10,
-  },
-
   card: {
     width: '50%',
     p: 5,

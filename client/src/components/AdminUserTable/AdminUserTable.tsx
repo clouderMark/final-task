@@ -3,7 +3,7 @@ import {createSearchParams, useNavigate, useSearchParams} from 'react-router-dom
 import {Button, TableCell, TablePagination, TableRow} from '@mui/material';
 import {useChangeUserRoleMutation, useChangeUserStatusMutation, useGetAllUsersMutation} from '../../redux/userApi';
 import {useAppSelector} from '../../redux/hooks';
-import {selectUser} from '../../views/login/redux/userSlice/userSlice';
+import {selectUser} from '../LoginUser/redux/userSlice/userSlice';
 import {Board} from '../../components/Board';
 import TableCells from '../../components/TableCells/TableCells';
 import {ERole, IObject, TId} from '../../types/types';

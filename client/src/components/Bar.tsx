@@ -8,7 +8,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {theme} from '../styles/theme';
 import {EPath} from '../types/EPath';
-import {logout, selectUser} from '../views/login/redux/userSlice/userSlice';
+import {logout, selectUser} from './LoginUser/redux/userSlice/userSlice';
 import {changeLang, selectLang} from './content/redux/langSlice';
 import {content} from './content/content';
 import {changeColorTheme, selectTheme} from '../styles/themeSlice/themeSlice';

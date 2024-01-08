@@ -1,8 +1,8 @@
 import {Route, Routes} from 'react-router-dom';
 import {EPath} from '../types/EPath';
 import {useAppSelector} from '../redux/hooks';
-import {selectUser} from '../views/login/redux/userSlice/userSlice';
-import Login from '../views/login/Login';
+import {selectUser} from './LoginUser/redux/userSlice/userSlice';
+import Login from '../views/Login';
 import Main from '../views/Main';
 import AdminUsers from '../views/AdminUsers';
 

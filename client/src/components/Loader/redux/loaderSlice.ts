@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {RootState} from '../../../redux/store';
-import {loginApi} from '../../../views/login/redux/loginApi';
+import {loginApi} from '../../LoginUser/redux/loginApi';
 import {initialState} from './initialState';
 import {userApi} from '../../../redux/userApi';
 
