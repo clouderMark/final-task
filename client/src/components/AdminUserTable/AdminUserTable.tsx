@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {createSearchParams, useNavigate, useSearchParams} from 'react-router-dom';
-import {Button, TableCell, TablePagination, TableRow} from '@mui/material';
+import {TableCell, TablePagination, TableRow} from '@mui/material';
 import {useChangeUserRoleMutation, useChangeUserStatusMutation, useGetAllUsersMutation} from '../../redux/userApi';
 import {useAppSelector} from '../../redux/hooks';
 import {selectUser} from '../LoginUser/redux/userSlice/userSlice';
@@ -12,6 +12,7 @@ import {content} from '../content/content';
 import {EPath} from '../../types/EPath';
 import {getSearchParams} from './getSearchParams';
 import {EParams} from './types';
+import ThemedButton from '../ThemedButton';
 
 const defaultLimit = 1;
 const defaultPage = 0;
@@ -118,7 +119,7 @@ const AdminUserTable = () => {
                     <TableCell scope="row">{row.id}</TableCell>
                     <TableCell>{row.name}</TableCell>
                     <TableCell>
-                      <Button
+                      <ThemedButton
                         size="small"
                         variant="outlined"
                         onClick={() => handleClickChangeStatus(row.id!)}
@@ -126,10 +127,10 @@ const AdminUserTable = () => {
                       >
                         {content[lang].adminUser.statusIs}{' '}
                         {row.isBlocked ? content[lang].adminUser.blocked : content[lang].adminUser.active}
-                      </Button>
+                      </ThemedButton>
                     </TableCell>
                     <TableCell>
-                      <Button
+                      <ThemedButton
                         size="small"
                         variant="outlined"
                         onClick={() => handleClickChangeRole(row.id!)}
@@ -137,7 +138,7 @@ const AdminUserTable = () => {
                       >
                         {content[lang].adminUser.roleIs}{' '}
                         {row.role === ERole.ADMIN ? content[lang].admin : content[lang].user}
-                      </Button>
+                      </ThemedButton>
                     </TableCell>
                   </TableRow>
                 ))}

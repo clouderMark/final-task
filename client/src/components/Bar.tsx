@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {AppBar, Toolbar, Button, Box, IconButton} from '@mui/material';
+import {AppBar, Toolbar, Box, IconButton} from '@mui/material';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import LanguageIcon from '@mui/icons-material/Language';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -13,6 +13,7 @@ import {changeLang, selectLang} from './content/redux/langSlice';
 import {content} from './content/content';
 import {changeColorTheme, selectTheme} from '../styles/themeSlice/themeSlice';
 import {ETheme} from '../types/types';
+import ThemedButton from './ThemedButton';
 
 const Bar = () => {
   const {type} = useAppSelector(selectTheme);
@@ -32,27 +33,27 @@ const Bar = () => {
     <AppBar sx={{backgroundColor: theme.palette.first[type], borderBottom: `0.5px solid ${theme.palette.third[type]}`}}>
       <Toolbar sx={{}}>
         {isAdmin ? (
-          <Button
+          <ThemedButton
             onClick={() => navigate(EPath.AdminUsers, {replace: true})}
-            sx={{m: 1, color: theme.palette.third[type]}}
+            sx={{m: 1}}
           >
             {content[lang].bar.adminUsers}
-          </Button>
+          </ThemedButton>
         ) : null}
         <Box sx={{ml: 'auto'}}>
           {isAuth ? (
-            <Button
-              sx={{m: 1, color: theme.palette.third[type]}}
+            <ThemedButton
+              sx={{m: 1}}
               onClick={handleLogout}
               aria-label={content[lang].bar.logout}
               endIcon={<LogoutRoundedIcon />}
             >
               {name}
-            </Button>
+            </ThemedButton>
           ) : !isLoginPage && !isSignupPage ? (
-            <Button onClick={() => navigate(EPath.Login, {replace: true})} sx={{ml: 'auto'}}>
+            <ThemedButton onClick={() => navigate(EPath.Login, {replace: true})} sx={{ml: 'auto'}}>
               {content[lang].bar.login}
-            </Button>
+            </ThemedButton>
           ) : null}
           <IconButton sx={{m: 1, color: theme.palette.third[type]}} onClick={() => dispatch(changeLang())}>
             <LanguageIcon />

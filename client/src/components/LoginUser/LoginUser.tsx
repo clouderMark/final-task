@@ -1,5 +1,5 @@
 import {useEffect, FormEvent, useState, ChangeEvent} from 'react';
-import {Box, Button, Card, TextField, Typography} from '@mui/material';
+import {Box, Card, TextField, Typography} from '@mui/material';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {EPath} from '../../types/EPath';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
@@ -14,6 +14,7 @@ import {selectLang} from '../content/redux/langSlice';
 import {content} from '../content/content';
 import {selectTheme} from '../../styles/themeSlice/themeSlice';
 import {theme} from '../../styles/theme';
+import ThemedButton from '../ThemedButton';
 
 const LoginUser = () => {
   const {type} = useAppSelector(selectTheme);
@@ -116,13 +117,13 @@ const LoginUser = () => {
           color={valid[EName.PASSWORD] ? 'success' : 'primary'}
         />
         <Box sx={styles.box}>
-          <Button
+          <ThemedButton
             type="submit"
             sx={[styles.button, {color: theme.palette.third[type], background: theme.palette.second[type]}]}
             variant="outlined"
           >
             {isLogin ? content[lang].login.button.login : content[lang].login.button.registration}
-          </Button>
+          </ThemedButton>
           <Typography sx={{mt: 'auto', color: theme.palette.third[type]}}>
             {isLogin ? content[lang].login.label.login : content[lang].login.label.registration}
             <Link to={isLogin ? EPath.Signup : EPath.Login}>
