@@ -41,22 +41,22 @@ export interface ICustomError {
 }
 
 export interface IId {
-  [EField.ID]?: TId;
+  id?: TId;
 }
 interface IEmail {
-  [EField.EMAIL]: TEmail;
+  email: TEmail;
 }
 
 interface IName {
-  [EField.NAME]: TName;
+  name: TName;
 }
 
 interface IIsBlocked {
-  [EField.ISBLOCKED]: boolean;
+  isBlocked: boolean;
 }
 
 export interface ILogin extends IEmail, IId {
-  [EField.PASSWORD]: TPass;
+  password: TPass;
 }
 export interface IToken {
   [EField.TOKEN]: TToken;
@@ -70,11 +70,11 @@ export interface IObject {
 }
 
 interface IRole {
-  [EField.ROLE]: TRole;
+  role: TRole;
 }
 
 export interface IUser extends IId, IRole, IName, IIsBlocked {}
 
 export interface IChangeUser extends IToken {
-  [EField.ID]: TId;
+  id: TId;
 }

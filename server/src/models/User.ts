@@ -2,15 +2,23 @@ import {ERole, EField, IUserData, TEmail, TId} from '../types/types';
 import {User as UserMapping} from './mapping';
 // import AppError from '../errors/AppError.js';
 
+interface IOptions {
+  page: number;
+  limit: number;
+}
+
 export const userAttributes = {
   attributes: [EField.ID, EField.NAME, EField.ROLE, EField.ISBLOCKED],
 };
 
 class User {
-  async getAll() {
-    const users = await UserMapping.findAll(userAttributes);
+  async getAll(options: IOptions) {
+    const {limit, page} = options;
+    const offset = page * limit;
+    const length = await UserMapping.count();
+    const users = await UserMapping.findAll({offset, limit, attributes: userAttributes.attributes});
 
-    return users;
+    return {users, numberOfRecords: length};
   }
 
   async getOne(id: TId) {

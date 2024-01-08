@@ -3,6 +3,16 @@ import {IChangeUser, ICustomError, IUser, IToken} from '../types/types';
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
+interface IReq extends IToken {
+  page: number;
+  limit: number;
+}
+
+interface IRes {
+  users: IUser[];
+  numberOfRecords: number;
+}
+
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
@@ -24,12 +34,21 @@ export const userApi = createApi({
         headers: {authorization: `Bearer ${data.token}`},
       }),
     }),
-    getAllUsers: builder.mutation<IUser[], IToken>({
-      query: (data) => ({
-        url: '/getall',
-        method: 'GET',
-        headers: {authorization: `Bearer ${data.token}`},
-      }),
+    getAllUsers: builder.mutation<IRes, IReq>({
+      query: (data) => {
+        const {token, page, limit} = data;
+
+        return {
+          url: '/getall',
+          method: 'GET',
+          headers: {authorization: `Bearer ${token}`},
+          params: {
+            // GET-параметры для постраничной навигации
+            page,
+            limit,
+          },
+        };
+      },
     }),
   }),
 });

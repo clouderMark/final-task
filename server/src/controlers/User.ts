@@ -82,7 +82,15 @@ class User {
 
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const users = await UserModel.getAll();
+      const {limit = null, page = null} = req.query;
+
+      const numLimit =
+        limit && /[0-9]+/.test(limit.toString()) && parseInt(limit.toString()) ? parseInt(limit.toString()) : 3;
+      const numPage =
+        page && /[0-9]+/.test(page.toString()) && parseInt(page.toString()) >= 0 ? parseInt(page.toString()) : 1;
+
+      const options = {limit: numLimit, page: numPage};
+      const users = await UserModel.getAll(options);
 
       res.json(users);
     } catch (e: unknown) {
