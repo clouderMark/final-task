@@ -38,6 +38,10 @@ class User {
       throw new Error('Пользователь не найдена в БД');
     }
 
+    if (user.isBlocked) {
+      throw new Error(`User ${user.name} is blocked. Сontact with administrator for solve this issue`);
+    }
+
     return user;
   }
 
