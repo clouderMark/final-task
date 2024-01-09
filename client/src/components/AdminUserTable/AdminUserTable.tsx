@@ -13,11 +13,14 @@ import {EPath} from '../../types/EPath';
 import {getSearchParams} from './getSearchParams';
 import {EParams} from './types';
 import ThemedButton from '../ThemedButton';
+import {selectTheme} from '../../styles/themeSlice/themeSlice';
+import {theme} from '../../styles/theme';
 
 const defaultLimit = 1;
 const defaultPage = 0;
 
 const AdminUserTable = () => {
+  const {type} = useAppSelector(selectTheme);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const {lang} = useAppSelector(selectLang);
@@ -153,7 +156,16 @@ const AdminUserTable = () => {
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
-            sx={{div: {flexDirection: 'row'}}}
+            sx={{
+              div: {
+                flexDirection: 'row',
+                color: theme.palette.third[type],
+                backgroundColor: theme.palette.first[type],
+              },
+              svg: {
+                fill: theme.palette.third[type],
+              },
+            }}
           />
         </>
       ) : null}
