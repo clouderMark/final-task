@@ -34,8 +34,6 @@ export const content: IContent = {
     adminUser: {
       blocked: 'blocked',
       active: 'active',
-      statusIs: 'status is',
-      roleIs: 'role is',
       userName: 'user name',
       changeStatus: 'change status',
       changeRole: 'change role',
@@ -75,8 +73,6 @@ export const content: IContent = {
     adminUser: {
       blocked: 'заблакаваны',
       active: 'актыўны',
-      statusIs: 'статус',
-      roleIs: 'роль',
       userName: 'імя карыстальніка',
       changeStatus: 'змяніць статус',
       changeRole: 'змяніць роль',

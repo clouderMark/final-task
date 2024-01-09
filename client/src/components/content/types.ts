@@ -30,8 +30,6 @@ interface IAppContent {
   adminUser: {
     blocked: string;
     active: string;
-    statusIs: string;
-    roleIs: string;
     userName: string;
     changeStatus: string;
     changeRole: string;

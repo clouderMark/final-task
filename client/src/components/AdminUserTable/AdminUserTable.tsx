@@ -128,7 +128,6 @@ const AdminUserTable = () => {
                         onClick={() => handleClickChangeStatus(row.id!)}
                         color="warning"
                       >
-                        {content[lang].adminUser.statusIs}{' '}
                         {row.isBlocked ? content[lang].adminUser.blocked : content[lang].adminUser.active}
                       </ThemedButton>
                     </TableCell>
@@ -139,7 +138,6 @@ const AdminUserTable = () => {
                         onClick={() => handleClickChangeRole(row.id!)}
                         color="warning"
                       >
-                        {content[lang].adminUser.roleIs}{' '}
                         {row.role === ERole.ADMIN ? content[lang].admin : content[lang].user}
                       </ThemedButton>
                     </TableCell>
