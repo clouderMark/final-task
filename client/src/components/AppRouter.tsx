@@ -5,6 +5,7 @@ import {selectUser} from './LoginUser/redux/userSlice/userSlice';
 import Login from '../views/Login';
 import Main from '../views/Main';
 import AdminUsers from '../views/AdminUsers';
+import Collections from '../views/Collections';
 
 enum ERoute {
   Path = 'path',
@@ -22,7 +23,10 @@ const publicRoutes: IRoute[] = [
   {[ERoute.Path]: EPath.NotFound, [ERoute.Component]: Login},
 ];
 
-const authRoutes: IRoute[] = [{[ERoute.Path]: EPath.Main, [ERoute.Component]: Main}];
+const authRoutes: IRoute[] = [
+  {[ERoute.Path]: EPath.Main, [ERoute.Component]: Main},
+  {[ERoute.Path]: EPath.Collections, [ERoute.Component]: Collections},
+];
 
 const adminRoutes: IRoute[] = [{[ERoute.Path]: EPath.AdminUsers, [ERoute.Component]: AdminUsers}];
 

@@ -26,6 +26,7 @@ interface IAppContent {
     login: string;
     logout: string;
     adminUsers: string;
+    collections: string;
   },
   adminUser: {
     blocked: string;

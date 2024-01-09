@@ -40,6 +40,14 @@ const Bar = () => {
             {content[lang].bar.adminUsers}
           </ThemedButton>
         ) : null}
+        {isAuth ? (
+          <ThemedButton
+            onClick={() => navigate(EPath.Collections, {replace: true})}
+            sx={{m: 1}}
+          >
+            {content[lang].bar.collections}
+          </ThemedButton>
+        ) : null}
         <Box sx={{ml: 'auto'}}>
           {isAuth ? (
             <ThemedButton

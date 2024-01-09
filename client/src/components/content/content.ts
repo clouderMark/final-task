@@ -30,6 +30,7 @@ export const content: IContent = {
       login: 'Login',
       logout: 'Logout',
       adminUsers: 'Users',
+      collections: 'Collections',
     },
     adminUser: {
       blocked: 'blocked',
@@ -69,6 +70,7 @@ export const content: IContent = {
       login: 'Увайсці',
       logout: 'Выйсці',
       adminUsers: 'Карыстальнікі',
+      collections: 'Калекцыі',
     },
     adminUser: {
       blocked: 'заблакаваны',

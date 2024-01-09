@@ -4,4 +4,5 @@ export enum EPath {
   NotFound = '*',
   Main = '/',
   AdminUsers = '/admin/users',
+  Collections = 'collections',
 }
