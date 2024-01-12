@@ -6,6 +6,7 @@ import {loginApi} from '../components/LoginUser/redux/loginApi';
 import {langSlice} from '../components/content/redux/langSlice';
 import {themeSlice} from '../styles/themeSlice/themeSlice';
 import {userApi} from './userApi';
+import {dialogWithTitleSlice} from '../components/DialogWithTitle/dialogWithTitleSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     lang: langSlice.reducer,
     theme: themeSlice.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    dialogWithTitle: dialogWithTitleSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
