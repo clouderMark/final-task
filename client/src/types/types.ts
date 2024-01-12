@@ -78,3 +78,12 @@ export interface IUser extends IId, IRole, IName, IIsBlocked {}
 export interface IChangeUser extends IToken {
   id: TId;
 }
+
+export interface IPageLimit {
+  page: number;
+  limit: number;
+}
+
+export interface INumberOfRecords {
+  numberOfRecords: number;
+}

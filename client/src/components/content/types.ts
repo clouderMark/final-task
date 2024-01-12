@@ -37,4 +37,8 @@ interface IAppContent {
   }
   admin: string;
   user: string;
+  save: string;
+  collection: {
+    create: string;
+  }
 }

@@ -6,6 +6,7 @@ import {loginApi} from '../components/LoginUser/redux/loginApi';
 import {langSlice} from '../components/content/redux/langSlice';
 import {themeSlice} from '../styles/themeSlice/themeSlice';
 import {userApi} from './userApi';
+import {collectionApi} from './collectionApi';
 import {dialogWithTitleSlice} from '../components/DialogWithTitle/dialogWithTitleSlice';
 
 export const store = configureStore({
@@ -17,6 +18,7 @@ export const store = configureStore({
     lang: langSlice.reducer,
     theme: themeSlice.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [collectionApi.reducerPath]: collectionApi.reducer,
     dialogWithTitle: dialogWithTitleSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -24,7 +26,8 @@ export const store = configureStore({
       serializableCheck: false,
     })
       .concat(loginApi.middleware)
-      .concat(userApi.middleware),
+      .concat(userApi.middleware)
+      .concat(collectionApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

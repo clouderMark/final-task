@@ -1,16 +1,12 @@
 import {createApi, fetchBaseQuery, BaseQueryFn, FetchArgs} from '@reduxjs/toolkit/query/react';
-import {IChangeUser, ICustomError, IUser, IToken} from '../types/types';
+import {IChangeUser, ICustomError, IUser, IToken, IPageLimit, INumberOfRecords} from '../types/types';
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
-interface IReq extends IToken {
-  page: number;
-  limit: number;
-}
+interface IReq extends IToken, IPageLimit {}
 
-interface IRes {
+interface IRes extends INumberOfRecords {
   users: IUser[];
-  numberOfRecords: number;
 }
 
 export const userApi = createApi({
