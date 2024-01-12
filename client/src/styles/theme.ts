@@ -5,18 +5,21 @@ declare module '@mui/material/styles' {
     first?: PaletteColorOptions;
     second?: PaletteColorOptions;
     third?: PaletteColorOptions;
+    fourth?: PaletteColorOptions;
   }
 
   interface Palette {
     first: PaletteColor;
     second: PaletteColor;
     third: PaletteColor;
+    fourth: PaletteColor;
   }
 
   interface ButtonPropsColorOverrides {
     first: true;
     second: true;
     third: true;
+    fourth: true;
   }
 }
 
@@ -25,6 +28,7 @@ declare module '@mui/material/Button' {
     first: true;
     second: true;
     third: true;
+    fourth: true;
   }
 }
 
@@ -42,6 +46,10 @@ const globalTheme = createTheme({
       main: '#25282e', // color
       dark: '#e7edf2',
     },
+    fourth: {
+      main: '#f6f8fa',
+      dark: '#242526',
+    },
   },
 });
 
@@ -58,6 +66,10 @@ export const theme = createTheme({
     third: {
       main: globalTheme.palette.third.main,
       dark: globalTheme.palette.third.dark,
+    },
+    fourth: {
+      main: globalTheme.palette.fourth.main,
+      dark: globalTheme.palette.fourth.dark,
     },
   },
   // typography: {
