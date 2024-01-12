@@ -1,5 +1,5 @@
 import {useEffect, FormEvent, useState, ChangeEvent} from 'react';
-import {Box, Card, TextField, Typography} from '@mui/material';
+import {Box, Card, Typography} from '@mui/material';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {EPath} from '../../types/EPath';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
@@ -15,6 +15,7 @@ import {content} from '../content/content';
 import {selectTheme} from '../../styles/themeSlice/themeSlice';
 import {theme} from '../../styles/theme';
 import ThemedButton from '../ThemedButton';
+import ThemedTextField from '../ThemedTextField';
 
 const LoginUser = () => {
   const {type} = useAppSelector(selectTheme);
@@ -79,18 +80,11 @@ const LoginUser = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          input: {
-            '&::placeholder': {
-              color: theme.palette.third[type],
-            },
-            color: theme.palette.third[type],
-            background: theme.palette.second[type],
-          },
         }}
         onSubmit={handleSubmit}
       >
         {!isLogin ? (
-          <TextField
+          <ThemedTextField
             name={EName.NAME}
             sx={{mt: 3}}
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
@@ -99,7 +93,7 @@ const LoginUser = () => {
             color={valid[EName.NAME] ? 'success' : 'primary'}
           />
         ) : null}
-        <TextField
+        <ThemedTextField
           name={EName.EMAIL}
           sx={{mt: 3}}
           onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
@@ -107,7 +101,7 @@ const LoginUser = () => {
           error={valid[EName.EMAIL] === false}
           color={valid[EName.EMAIL] ? 'success' : 'primary'}
         />
-        <TextField
+        <ThemedTextField
           name={EName.PASSWORD}
           onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
           sx={{mt: 3}}
