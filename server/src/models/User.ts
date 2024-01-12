@@ -1,22 +1,15 @@
-import {ERole, EField, IUserData, TEmail, TId} from '../types/types';
+import {ERole, EField, IUserData, TEmail, TId, IOptions} from '../types/types';
 import {User as UserMapping} from './mapping';
 // import AppError from '../errors/AppError.js';
 
-interface IOptions {
-  page: number;
-  limit: number;
-}
-
-export const userAttributes = {
-  attributes: [EField.ID, EField.NAME, EField.ROLE, EField.ISBLOCKED],
-};
+export const userAttributes = [EField.ID, EField.NAME, EField.ROLE, EField.ISBLOCKED];
 
 class User {
   async getAll(options: IOptions) {
     const {limit, page} = options;
     const offset = page * limit;
     const length = await UserMapping.count();
-    const users = await UserMapping.findAll({offset, limit, attributes: userAttributes.attributes});
+    const users = await UserMapping.findAll({offset, limit, attributes: userAttributes});
 
     return {users, numberOfRecords: length};
   }

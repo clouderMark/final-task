@@ -70,7 +70,7 @@ class User {
             return res.json({token});
           }
         }
-
+      } else {
         throw new Error('Не указан email, id или role');
       }
     } catch (e: unknown) {
