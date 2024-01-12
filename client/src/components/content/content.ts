@@ -41,6 +41,10 @@ export const content: IContent = {
     },
     admin: 'Admin',
     user: 'User',
+    save: 'Save',
+    collection: {
+      create: 'Create collection',
+    },
   },
   [ELang.BEL]: {
     login: {
@@ -81,5 +85,9 @@ export const content: IContent = {
     },
     admin: 'Адмін',
     user: 'Карыстальнік',
+    save: 'Захаваць',
+    collection: {
+      create: 'Стварыць калекцыю',
+    },
   },
 };
