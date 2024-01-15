@@ -1,4 +1,4 @@
-import {Box, SelectChangeEvent} from '@mui/material';
+import {Box, FormControlLabel, Switch} from '@mui/material';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useCreateCollectionMutation} from '../../redux/collectionApi';
 import {selectUser} from '../LoginUser/redux/userSlice/userSlice';
@@ -19,8 +19,11 @@ const CreateCollection = () => {
   const [send] = useCreateCollectionMutation();
   const [propsType, setPropType] = useState<string[]>([]);
 
-  const handleInputChange = (event: SelectChangeEvent<string> | ChangeEvent<HTMLInputElement>) => {
-    const data = {...value, [event.target.name]: event.target.value};
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const data = {
+      ...value,
+      [event.target.name]: event.target.name === EName.VISIBLE ? event.target.checked : event.target.value,
+    };
 
     setValue(data);
   };
@@ -71,6 +74,16 @@ const CreateCollection = () => {
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
             placeholder="theme..."
             sx={{width: '100%', mb: 3}}
+          />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={value[EName.VISIBLE]}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
+                name={EName.VISIBLE}
+              />
+            }
+            label={content[lang].visible}
           />
           <ThemedMultiSelect
             inputLabel={content[lang].collection.propsType}

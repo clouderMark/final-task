@@ -47,6 +47,7 @@ export const content: IContent = {
     int: 'Integer',
     text: 'Text',
     date: 'Date',
+    visible: 'Visible',
     collection: {
       create: 'Create collection',
       propsType: 'Props type',
@@ -97,6 +98,7 @@ export const content: IContent = {
     int: 'Цэлая лічба',
     text: 'Tэкст',
     date: 'Дата',
+    visible: 'Бачна',
     collection: {
       create: 'Стварыць калекцыю',
       propsType: 'Тып уласцівасцяў',

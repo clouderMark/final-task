@@ -43,6 +43,7 @@ interface IAppContent {
   int: string;
   text: string;
   date: string;
+  visible: string;
   collection: {
     create: string;
     propsType: string;
