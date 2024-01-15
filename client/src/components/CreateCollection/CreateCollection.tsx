@@ -9,23 +9,7 @@ import {selectLang} from '../content/redux/langSlice';
 import {content} from '../content/content';
 import ThemedTextField from '../ThemedTextField';
 import ThemedMultiSelect from '../ThemedMultiSelect';
-import {propsTypeValues} from './value';
-
-export interface IDefaultValue {
-  name: string;
-  description: string;
-  theme: string;
-  image: string;
-  visible: boolean;
-}
-
-export const defaultValue: IDefaultValue = {
-  name: '',
-  description: '',
-  theme: '',
-  image: '',
-  visible: true,
-};
+import {defaultValue, propsTypeValues} from './value';
 
 const CreateCollection = () => {
   const {token} = useAppSelector(selectUser);

@@ -1,6 +1,15 @@
 import {EItemTypeProp, ELang} from '../../types/types';
 import {IValue} from '../ThemedMultiSelect';
 import {content} from '../content/content';
+import {IDefaultValue} from './types';
+
+export const defaultValue: IDefaultValue = {
+  name: '',
+  description: '',
+  theme: '',
+  image: '',
+  visible: true,
+};
 
 export const propsTypeValues: IValue[] = [
   {
