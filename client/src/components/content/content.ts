@@ -48,6 +48,9 @@ export const content: IContent = {
     text: 'Text',
     date: 'Date',
     visible: 'Visible',
+    photo: 'Photo',
+    change: 'Change',
+    add: 'Add',
     collection: {
       create: 'Create collection',
       propsType: 'Props type',
@@ -99,6 +102,9 @@ export const content: IContent = {
     text: 'Tэкст',
     date: 'Дата',
     visible: 'Бачна',
+    photo: 'Фота',
+    change: 'Змяніць',
+    add: 'Дабавіць',
     collection: {
       create: 'Стварыць калекцыю',
       propsType: 'Тып уласцівасцяў',

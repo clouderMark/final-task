@@ -2,7 +2,6 @@ export interface IDefaultValue {
   [EName.NAME]: string;
   [EName.DESCRIPTION]: string;
   [EName.THEME]: string;
-  [EName.IMAGE]: string;
   [EName.VISIBLE]: boolean;
 }
 

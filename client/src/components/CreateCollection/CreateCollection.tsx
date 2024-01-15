@@ -9,8 +9,10 @@ import {selectLang} from '../content/redux/langSlice';
 import {content} from '../content/content';
 import ThemedTextField from '../ThemedTextField';
 import ThemedMultiSelect from '../ThemedMultiSelect';
-import {defaultValue, propsTypeValues} from './value';
+import {defaultValue, imgeDefaultValue, propsTypeValues} from './value';
 import {EName} from './types';
+import InputImage from '../InputImage/InputImage';
+import {IImage} from '../../types/types';
 
 const CreateCollection = () => {
   const {token} = useAppSelector(selectUser);
@@ -18,6 +20,7 @@ const CreateCollection = () => {
   const {lang} = useAppSelector(selectLang);
   const [send] = useCreateCollectionMutation();
   const [propsType, setPropType] = useState<string[]>([]);
+  const [image, setImage] = useState<IImage>(imgeDefaultValue);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const data = {
@@ -35,7 +38,10 @@ const CreateCollection = () => {
 
     data.append('name', value[EName.NAME].trim());
     data.append('description', value[EName.DESCRIPTION].trim());
-    data.append('image', value[EName.IMAGE]);
+    if (image.image) {
+      data.append('image', image.image);
+    }
+
     data.append('theme', value[EName.THEME]);
     data.append('visible', `${value[EName.VISIBLE]}`);
     data.append('itemPropType', JSON.stringify(propsType));
@@ -61,13 +67,9 @@ const CreateCollection = () => {
             placeholder="description..."
             sx={{width: '100%', mb: 3}}
           />
-          <ThemedTextField
-            name={EName.IMAGE}
-            value={value[EName.IMAGE]}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
-            placeholder="image..."
-            sx={{width: '100%', mb: 3}}
-          />
+          <Box sx={{width: '335px'}}>
+            <InputImage value={image} setValue={setImage} />
+          </Box>
           <ThemedTextField
             name={EName.THEME}
             value={value[EName.THEME]}

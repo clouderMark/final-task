@@ -44,6 +44,9 @@ interface IAppContent {
   text: string;
   date: string;
   visible: string;
+  photo: string;
+  change: string;
+  add: string;
   collection: {
     create: string;
     propsType: string;

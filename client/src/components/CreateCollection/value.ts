@@ -1,4 +1,4 @@
-import {EItemTypeProp, ELang} from '../../types/types';
+import {EItemTypeProp, ELang, IImage} from '../../types/types';
 import {IValue} from '../ThemedMultiSelect';
 import {content} from '../content/content';
 import {EName, IDefaultValue} from './types';
@@ -7,9 +7,10 @@ export const defaultValue: IDefaultValue = {
   [EName.NAME]: '',
   [EName.DESCRIPTION]: '',
   [EName.THEME]: '',
-  [EName.IMAGE]: '',
   [EName.VISIBLE]: true,
 };
+
+export const imgeDefaultValue: IImage = {image: null, imageUrl: ''};
 
 export const propsTypeValues: IValue[] = [
   {

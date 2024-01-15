@@ -95,3 +95,8 @@ export enum EItemTypeProp {
   TEXT = 'text',
   DATE = 'date',
 }
+
+export interface IImage {
+  image: File | null;
+  imageUrl: string;
+}
