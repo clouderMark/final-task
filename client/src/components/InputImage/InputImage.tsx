@@ -1,20 +1,21 @@
-import {ChangeEvent, Dispatch, SetStateAction} from 'react';
+import {ChangeEvent} from 'react';
+import {ActionCreatorWithPayload} from '@reduxjs/toolkit';
 import {Box, BoxProps, Button} from '@mui/material';
 import {cardInputImage as styles} from './styles/cardInputImage';
-import {IImage} from '../../types/types';
-import {useAppSelector} from '../../redux/hooks';
+import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {selectLang} from '../content/redux/langSlice';
 import {content} from '../content/content';
 
 interface IProps {
-  value: IImage;
-  setValue: Dispatch<SetStateAction<IImage>>;
+  imageUrl: string | null;
+  action: ActionCreatorWithPayload<FileList | null>;
   sx?: BoxProps;
   error?: boolean | null;
 }
 
 const InputImage = (props: IProps) => {
-  const {value, setValue} = props;
+  const dispatch = useAppDispatch();
+  const {imageUrl, action} = props;
   const {lang} = useAppSelector(selectLang);
   let error;
 
@@ -22,19 +23,9 @@ const InputImage = (props: IProps) => {
     error = props.error;
   } else error = true;
 
-  const handleImgeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const {files} = event.target;
-
-    if (files) {
-      const file = files[0];
-
-      setValue({image: file, imageUrl: URL.createObjectURL(file)});
-    }
-  };
-
   return (
     <Box sx={[styles.card, !error ? {border: '1.5px solid red'} : {border: 0}, {...props.sx}]}>
-      <Box sx={styles.img} component="img" src={value.imageUrl || ''} />
+      <Box sx={styles.img} component="img" src={imageUrl || ''} />
       <Button
         sx={{
           position: 'absolute',
@@ -48,13 +39,13 @@ const InputImage = (props: IProps) => {
       >
         <input
           type="file"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => handleImgeChange(e)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(action(e.target.files))}
           placeholder={`${content[lang].photo} ...`}
           hidden
           accept="image/*"
           aria-label="upload picture"
         />
-        {`${value ? content[lang].change : content[lang].add} ${content[lang].photo.toLowerCase()}`}
+        {`${imageUrl ? content[lang].change : content[lang].add} ${content[lang].photo.toLowerCase()}`}
       </Button>
     </Box>
   );

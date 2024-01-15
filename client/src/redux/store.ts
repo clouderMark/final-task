@@ -8,6 +8,7 @@ import {themeSlice} from '../styles/themeSlice/themeSlice';
 import {userApi} from './userApi';
 import {collectionApi} from './collectionApi';
 import {dialogWithTitleSlice} from '../components/DialogWithTitle/dialogWithTitleSlice';
+import {createCollectionSlice} from '../components/CreateCollection/redux/createCollectionSlice';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [collectionApi.reducerPath]: collectionApi.reducer,
     dialogWithTitle: dialogWithTitleSlice.reducer,
+    createCollection: createCollectionSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
