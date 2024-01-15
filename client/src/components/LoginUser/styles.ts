@@ -14,7 +14,6 @@ export const styles = {
     justifyContent: 'space-between',
     mt: 2,
     mb: 2,
-    p: 3,
 
     '@media (max-width: 1100px)': {
       flexDirection: 'column',

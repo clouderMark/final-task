@@ -1,5 +1,5 @@
 import {useEffect, FormEvent, useState, ChangeEvent} from 'react';
-import {Box, Card, Typography} from '@mui/material';
+import {Box, Card} from '@mui/material';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {EPath} from '../../types/EPath';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
@@ -16,6 +16,7 @@ import {selectTheme} from '../../styles/themeSlice/themeSlice';
 import {theme} from '../../styles/theme';
 import ThemedButton from '../ThemedButton';
 import ThemedTextField from '../ThemedTextField';
+import ThemedTypography from '../ThemedTypography';
 
 const LoginUser = () => {
   const {type} = useAppSelector(selectTheme);
@@ -72,9 +73,9 @@ const LoginUser = () => {
 
   return (
     <Card sx={[styles.card, {backgroundColor: theme.palette.first[type]}]}>
-      <Typography component="h3" sx={{mt: 'auto'}}>
+      <ThemedTypography component="h3" sx={{mt: 'auto'}}>
         {isLogin ? content[lang].login.title.login : content[lang].login.title.registration}
-      </Typography>
+      </ThemedTypography>
       <Box
         component="form"
         sx={{
@@ -113,17 +114,17 @@ const LoginUser = () => {
         <Box sx={styles.box}>
           <ThemedButton
             type="submit"
-            sx={[styles.button, {color: theme.palette.third[type], background: theme.palette.second[type]}]}
+            sx={[styles.button]}
             variant="outlined"
           >
             {isLogin ? content[lang].login.button.login : content[lang].login.button.registration}
           </ThemedButton>
-          <Typography sx={{mt: 'auto', color: theme.palette.third[type]}}>
+          <ThemedTypography sx={{mt: 'auto'}}>
             {isLogin ? content[lang].login.label.login : content[lang].login.label.registration}
             <Link to={isLogin ? EPath.Signup : EPath.Login}>
               {isLogin ? content[lang].login.link.login : content[lang].login.link.registration}
             </Link>
-          </Typography>
+          </ThemedTypography>
         </Box>
       </Box>
     </Card>
