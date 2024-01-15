@@ -38,7 +38,13 @@ interface IAppContent {
   admin: string;
   user: string;
   save: string;
+  string: string;
+  bool: string;
+  int: string;
+  text: string;
+  date: string;
   collection: {
     create: string;
+    propsType: string;
   }
 }

@@ -1,5 +1,5 @@
 import {Container} from '@mui/material';
-import CreateCollection from '../components/CreateCollection';
+import CreateCollection from '../components/CreateCollection/CreateCollection';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {setShow} from '../components/DialogWithTitle/dialogWithTitleSlice';
 import ThemedButton from '../components/ThemedButton';

@@ -42,8 +42,14 @@ export const content: IContent = {
     admin: 'Admin',
     user: 'User',
     save: 'Save',
+    string: 'String',
+    bool: 'Boolean',
+    int: 'Integer',
+    text: 'Text',
+    date: 'Date',
     collection: {
       create: 'Create collection',
+      propsType: 'Props type',
     },
   },
   [ELang.BEL]: {
@@ -86,8 +92,14 @@ export const content: IContent = {
     admin: 'Адмін',
     user: 'Карыстальнік',
     save: 'Захаваць',
+    string: 'Палоска',
+    bool: 'Лагічны тып',
+    int: 'Цэлая лічба',
+    text: 'Tэкст',
+    date: 'Дата',
     collection: {
       create: 'Стварыць калекцыю',
+      propsType: 'Тып уласцівасцяў',
     },
   },
 };

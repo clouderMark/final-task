@@ -87,3 +87,11 @@ export interface IPageLimit {
 export interface INumberOfRecords {
   numberOfRecords: number;
 }
+
+export enum EItemTypeProp {
+  STR = 'str',
+  BOOL = 'bool',
+  INT = 'int',
+  TEXT = 'text',
+  DATE = 'date',
+}

@@ -13,7 +13,7 @@ interface IProps {
   values: IValue[];
 }
 
-interface IValue {
+export interface IValue {
   value: string;
   name: {
     [ELang.ENG]: string;
