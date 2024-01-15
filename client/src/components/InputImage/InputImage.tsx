@@ -1,10 +1,11 @@
 import {ChangeEvent} from 'react';
 import {ActionCreatorWithPayload} from '@reduxjs/toolkit';
-import {Box, BoxProps, Button} from '@mui/material';
-import {cardInputImage as styles} from './styles/cardInputImage';
+import {Box, BoxProps} from '@mui/material';
+import {styles} from './styles';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {selectLang} from '../content/redux/langSlice';
 import {content} from '../content/content';
+import ThemedButton from '../ThemedButton';
 
 interface IProps {
   imageUrl: string | null;
@@ -26,7 +27,7 @@ const InputImage = (props: IProps) => {
   return (
     <Box sx={[styles.card, !error ? {border: '1.5px solid red'} : {border: 0}, {...props.sx}]}>
       <Box sx={styles.img} component="img" src={imageUrl || ''} />
-      <Button
+      <ThemedButton
         sx={{
           position: 'absolute',
           top: 0,
@@ -34,8 +35,7 @@ const InputImage = (props: IProps) => {
         }}
         aria-label="upload picture"
         component="label"
-        color="first"
-        variant="contained"
+        variant="outlined"
       >
         <input
           type="file"
@@ -46,7 +46,7 @@ const InputImage = (props: IProps) => {
           aria-label="upload picture"
         />
         {`${imageUrl ? content[lang].change : content[lang].add} ${content[lang].photo.toLowerCase()}`}
-      </Button>
+      </ThemedButton>
     </Box>
   );
 };
