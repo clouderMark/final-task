@@ -51,9 +51,10 @@ export const content: IContent = {
     photo: 'Photo',
     change: 'Change',
     add: 'Add',
+    no: 'No',
     collection: {
       create: 'Create collection',
-      propsType: 'Props type',
+      propsType: 'Properties type',
     },
   },
   [ELang.BEL]: {
@@ -105,6 +106,7 @@ export const content: IContent = {
     photo: 'Фота',
     change: 'Змяніць',
     add: 'Дабавіць',
+    no: 'Не',
     collection: {
       create: 'Стварыць калекцыю',
       propsType: 'Тып уласцівасцяў',

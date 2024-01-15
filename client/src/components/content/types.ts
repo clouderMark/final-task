@@ -47,6 +47,7 @@ interface IAppContent {
   photo: string;
   change: string;
   add: string;
+  no: string;
   collection: {
     create: string;
     propsType: string;

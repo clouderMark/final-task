@@ -21,6 +21,7 @@ import {
   setTheme,
   setVisibility,
 } from './redux/createCollectionSlice';
+import ThemedTypography from '../ThemedTypography';
 
 const CreateCollection = () => {
   const dispatch = useAppDispatch();
@@ -51,22 +52,50 @@ const CreateCollection = () => {
     <DialogWithTitle
       child={
         <Box noValidate onSubmit={handleSubmit} component="form">
-          <ThemedTextField
-            name={EName.NAME}
-            value={name}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(setName(e.target.value))}
-            placeholder="name..."
-            sx={{width: '100% !important', mb: 3}}
-          />
-          <ThemedTextField
-            name={EName.DESCRIPTION}
-            value={description}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(setDescription(e.target.value))}
-            placeholder="description..."
-            sx={{width: '100%', mb: 3}}
-          />
-          <Box sx={{width: '335px'}}>
-            <InputImage imageUrl={image.imageUrl} action={setImage} />
+          <Box sx={{display: 'flex'}}>
+            <Box sx={{width: '335px', mr: 2}}>
+              <InputImage imageUrl={image.imageUrl} action={setImage} />
+            </Box>
+            <Box sx={{flexGrow: 1}}>
+              <Box sx={{display: 'flex', mb: 1}}>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={visible}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(setVisibility(e.target.checked))}
+                      name={EName.VISIBLE}
+                    />
+                  }
+                  label={
+                    <ThemedTypography>
+                      {visible ? content[lang].visible : `${content[lang].no} ${content[lang].visible.toLowerCase()}`}
+                    </ThemedTypography>
+                  }
+                  sx={{
+                    ml: 'auto',
+                    width: '140px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}
+                />
+              </Box>
+              <ThemedTextField
+                name={EName.NAME}
+                value={name}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(setName(e.target.value))}
+                placeholder="name..."
+                sx={{width: '100% !important', mb: 3}}
+              />
+              <ThemedTextField
+                name={EName.DESCRIPTION}
+                value={description}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(setDescription(e.target.value))}
+                placeholder="description..."
+                multiline={true}
+                rows={8}
+                sx={{width: '100%', mb: 3}}
+              />
+            </Box>
           </Box>
           <ThemedTextField
             name={EName.THEME}
@@ -75,23 +104,14 @@ const CreateCollection = () => {
             placeholder="theme..."
             sx={{width: '100%', mb: 3}}
           />
-          <FormControlLabel
-            control={
-              <Switch
-                checked={visible}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(setVisibility(e.target.checked))}
-                name={EName.VISIBLE}
-              />
-            }
-            label={content[lang].visible}
-          />
-          <ThemedMultiSelect
-            inputLabel={content[lang].collection.propsType}
-            value={props}
-            action={setPropType}
-            values={propsTypeValues}
-          />
-          <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
+
+          <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+            <ThemedMultiSelect
+              inputLabel={content[lang].collection.propsType}
+              value={props}
+              action={setPropType}
+              values={propsTypeValues}
+            />
             <ThemedButton sx={{ml: 'auto'}} type="submit" aria-label="save" variant="outlined">
               {content[lang].save}
             </ThemedButton>
