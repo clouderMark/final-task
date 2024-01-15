@@ -1,7 +1,15 @@
 export interface IDefaultValue {
-  name: string;
-  description: string;
-  theme: string;
-  image: string;
-  visible: boolean;
+  [EName.NAME]: string;
+  [EName.DESCRIPTION]: string;
+  [EName.THEME]: string;
+  [EName.IMAGE]: string;
+  [EName.VISIBLE]: boolean;
+}
+
+export enum EName {
+  NAME = 'name',
+  DESCRIPTION = 'description',
+  THEME = 'theme',
+  IMAGE = 'image',
+  VISIBLE = 'visible',
 }

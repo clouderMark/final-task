@@ -10,6 +10,7 @@ import {content} from '../content/content';
 import ThemedTextField from '../ThemedTextField';
 import ThemedMultiSelect from '../ThemedMultiSelect';
 import {defaultValue, propsTypeValues} from './value';
+import {EName} from './types';
 
 const CreateCollection = () => {
   const {token} = useAppSelector(selectUser);
@@ -29,11 +30,11 @@ const CreateCollection = () => {
 
     const data = new FormData();
 
-    data.append('name', value.name.trim());
-    data.append('description', value.description.trim());
-    data.append('image', value.image);
-    data.append('theme', value.theme);
-    data.append('visible', `${value.visible}`);
+    data.append('name', value[EName.NAME].trim());
+    data.append('description', value[EName.DESCRIPTION].trim());
+    data.append('image', value[EName.IMAGE]);
+    data.append('theme', value[EName.THEME]);
+    data.append('visible', `${value[EName.VISIBLE]}`);
     data.append('itemPropType', JSON.stringify(propsType));
 
     send({data, token});
@@ -44,29 +45,29 @@ const CreateCollection = () => {
       child={
         <Box noValidate onSubmit={handleSubmit} component="form">
           <ThemedTextField
-            name="name"
-            value={value.name}
+            name={EName.NAME}
+            value={value[EName.NAME]}
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
             placeholder="name..."
             sx={{width: '100% !important', mb: 3}}
           />
           <ThemedTextField
-            name="description"
-            value={value.description}
+            name={EName.DESCRIPTION}
+            value={value[EName.DESCRIPTION]}
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
             placeholder="description..."
             sx={{width: '100%', mb: 3}}
           />
           <ThemedTextField
-            name="image"
-            value={value.image}
+            name={EName.IMAGE}
+            value={value[EName.IMAGE]}
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
             placeholder="image..."
             sx={{width: '100%', mb: 3}}
           />
           <ThemedTextField
-            name="theme"
-            value={value.theme}
+            name={EName.THEME}
+            value={value[EName.THEME]}
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
             placeholder="theme..."
             sx={{width: '100%', mb: 3}}
