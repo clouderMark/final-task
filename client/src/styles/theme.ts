@@ -88,10 +88,6 @@ export const theme = createTheme({
           fontWeight: 400,
           fontSize: '1.125rem',
           textTransform: 'none',
-          '&:hover': {
-            backgroundColor: 'trasparent',
-            // color: 'inherit',
-          },
         },
       },
     },
