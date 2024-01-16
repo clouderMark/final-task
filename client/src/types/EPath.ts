@@ -5,4 +5,6 @@ export enum EPath {
   Main = '/',
   AdminUsers = '/admin/users',
   Collections = 'collections',
+  Collection = 'collection',
+  CollectionItem = 'collection/:id',
 }

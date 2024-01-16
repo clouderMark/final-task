@@ -5,6 +5,7 @@ import {setShow} from '../components/DialogWithTitle/dialogWithTitleSlice';
 import ThemedButton from '../components/ThemedButton';
 import {selectLang} from '../components/content/redux/langSlice';
 import {content} from '../components/content/content';
+import AllCollections from '../components/AllCollections';
 
 const Collections = () => {
   const dispatch = useAppDispatch();
@@ -19,6 +20,7 @@ const Collections = () => {
       <ThemedButton onClick={handleClickPopUp} variant="outlined">
         {content[lang].collection.create}
       </ThemedButton>
+      <AllCollections />
       <CreateCollection />
     </Container>
   );
