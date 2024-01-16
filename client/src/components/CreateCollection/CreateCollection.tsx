@@ -1,5 +1,5 @@
 import {Box, FormControlLabel, Switch} from '@mui/material';
-import {ChangeEvent, FormEvent} from 'react';
+import {ChangeEvent, FormEvent, useEffect} from 'react';
 import {Editor} from '@tinymce/tinymce-react';
 import {useCreateCollectionMutation} from '../../redux/collectionApi';
 import {selectUser} from '../LoginUser/redux/userSlice/userSlice';
@@ -14,6 +14,7 @@ import {propsTypeValues} from './value';
 import {EName} from './redux/types';
 import InputImage from '../InputImage/InputImage';
 import {
+  reset,
   selectCollection,
   setDescription,
   setImage,
@@ -24,6 +25,7 @@ import {
 } from './redux/createCollectionSlice';
 import ThemedTypography from '../ThemedTypography';
 import {styles} from './styles';
+import {reset as closeDialog} from '../DialogWithTitle/dialogWithTitleSlice';
 
 const API_KEY = process.env.REACT_APP_TINY_API_KEY;
 
@@ -32,7 +34,14 @@ const CreateCollection = () => {
   const {name, description, theme, visible, image, props} = useAppSelector(selectCollection);
   const {token} = useAppSelector(selectUser);
   const {lang} = useAppSelector(selectLang);
-  const [send] = useCreateCollectionMutation();
+  const [send, {isSuccess}] = useCreateCollectionMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(reset());
+      dispatch(closeDialog());
+    }
+  }, [isSuccess]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
