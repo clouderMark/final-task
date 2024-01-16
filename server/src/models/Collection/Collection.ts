@@ -1,3 +1,4 @@
+import sanitizeHtml from 'sanitize-html';
 import {EItemTypeProp, IOptions, TId} from '../../types/types';
 import {Collection as CollectionMapping, ItemPropType} from '../mapping';
 import {IData} from './types';
@@ -32,7 +33,7 @@ class Collection {
 
     const collection = await CollectionMapping.create({
       name,
-      description,
+      description: sanitizeHtml(description),
       theme,
       visible,
       image,
