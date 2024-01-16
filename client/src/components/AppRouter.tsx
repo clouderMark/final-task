@@ -6,6 +6,7 @@ import Login from '../views/Login';
 import Main from '../views/Main';
 import AdminUsers from '../views/AdminUsers';
 import Collections from '../views/Collections';
+import CollectionItem from '../views/CollectionItem';
 
 enum ERoute {
   Path = 'path',
@@ -21,6 +22,7 @@ const publicRoutes: IRoute[] = [
   {[ERoute.Path]: EPath.Login, [ERoute.Component]: Login},
   {[ERoute.Path]: EPath.Signup, [ERoute.Component]: Login},
   {[ERoute.Path]: EPath.NotFound, [ERoute.Component]: Login},
+  {[ERoute.Path]: EPath.CollectionItem, [ERoute.Component]: CollectionItem},
 ];
 
 const authRoutes: IRoute[] = [
