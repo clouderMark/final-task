@@ -28,7 +28,7 @@ const ThemedMultiSelect = (props: IProps) => {
   const {type} = useAppSelector(selectTheme);
 
   return (
-    <FormControl sx={{width: 300, backgroundColor: theme.palette.second[type]}}>
+    <FormControl sx={{width: '100%', backgroundColor: theme.palette.second[type]}}>
       <InputLabel sx={{color: theme.palette.third[type], opacity: 0.4}}>{inputLabel}</InputLabel>
       <Select
         multiple

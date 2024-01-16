@@ -55,6 +55,9 @@ export const content: IContent = {
     collection: {
       create: 'Create collection',
       propsType: 'Properties type',
+      name: 'Collection name',
+      desctription: 'Description to collection',
+      theme: 'Collection theme',
     },
   },
   [ELang.BEL]: {
@@ -110,6 +113,9 @@ export const content: IContent = {
     collection: {
       create: 'Стварыць калекцыю',
       propsType: 'Тып уласцівасцяў',
+      name: 'Назва калекцыі',
+      desctription: 'Апісанне да калекцыі',
+      theme: 'Тэма калекцыі',
     },
   },
 };

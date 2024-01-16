@@ -51,5 +51,8 @@ interface IAppContent {
   collection: {
     create: string;
     propsType: string;
+    name: string;
+    desctription: string;
+    theme: string;
   }
 }
