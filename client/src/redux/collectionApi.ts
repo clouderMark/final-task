@@ -26,8 +26,15 @@ interface ICollection {
   userId: TId;
 }
 
+interface IAllCollection {
+  id: number;
+  name: string;
+  image: string;
+  theme: string;
+}
+
 interface IRes extends INumberOfRecords {
-  collections: ICollection[];
+  collections: IAllCollection[];
 }
 
 export const collectionApi = createApi({
