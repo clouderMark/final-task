@@ -4,9 +4,14 @@ import CollectionModel from '../models/Collection/Collection';
 import AppError from '../errors/AppError';
 
 class Collection {
-  async getAll(req: Request, res: Response, next: NextFunction) {
+  async getAll(req: IAuthRequest, res: Response, next: NextFunction) {
     try {
+      if (!req.auth?.id) {
+        throw new Error('Пользователь не имеет Id');
+      }
+
       const {limit = null, page = null} = req.query;
+      const {id} = req.auth;
 
       const numLimit =
         limit && /[0-9]+/.test(limit.toString()) && parseInt(limit.toString()) ? parseInt(limit.toString()) : 3;
@@ -14,7 +19,7 @@ class Collection {
         page && /[0-9]+/.test(page.toString()) && parseInt(page.toString()) >= 0 ? parseInt(page.toString()) : 1;
 
       const options = {limit: numLimit, page: numPage};
-      const users = await CollectionModel.getAll(options);
+      const users = await CollectionModel.getAll(options, id);
 
       res.json(users);
     } catch (e: unknown) {

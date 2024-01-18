@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery, BaseQueryFn, FetchArgs} from '@reduxjs/toolkit/query/react';
-import {ICustomError, INumberOfRecords, IPageLimit, TId, TToken} from '../types/types';
+import {ICustomError, INumberOfRecords, IPageLimit, IToken, TId, TToken} from '../types/types';
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -37,6 +37,8 @@ interface IRes extends INumberOfRecords {
   collections: IAllCollection[];
 }
 
+interface IPageLimitToken extends IPageLimit, IToken {}
+
 export const collectionApi = createApi({
   reducerPath: 'collectionApi',
   baseQuery: fetchBaseQuery({
@@ -72,18 +74,22 @@ export const collectionApi = createApi({
       },
     }),
 
-    getAllCollections: builder.mutation<IRes, IPageLimit>({
+    getAllUserCollections: builder.mutation<IRes, IPageLimitToken>({
       query: (data) => {
         const {page, limit} = data;
 
-        return {
-          url: '/getall',
+        const req: FetchArgs = {
+          url: '/getuserall',
           method: 'GET',
           params: {
             page,
             limit,
           },
         };
+
+        if (data.token) req.headers = {authorization: `Bearer ${data.token}`};
+
+        return req;
       },
     }),
 
@@ -113,5 +119,5 @@ export const {
   useGetOneCollectionMutation,
   useCreateCollectionMutation,
   useUpdateCollectionMutation,
-  useGetAllCollectionsMutation,
+  useGetAllUserCollectionsMutation,
 } = collectionApi;

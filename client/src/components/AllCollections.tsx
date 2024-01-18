@@ -1,21 +1,26 @@
 import {useEffect, useState} from 'react';
 import {Box} from '@mui/material';
-import {useGetAllCollectionsMutation} from '../redux/collectionApi';
+import {useGetAllUserCollectionsMutation} from '../redux/collectionApi';
 import ThemedTypography from './ThemedTypography';
 import ListItem from './ListItem/ListItem';
 import {EPath} from '../types/EPath';
+import {selectUser} from './LoginUser/redux/userSlice/userSlice';
+import {useAppSelector} from '../redux/hooks';
 
 const defaultLimit = 12;
 const defaultPage = 0;
 
 const AllCollections = () => {
-  const [getData, {data}] = useGetAllCollectionsMutation();
+  const {token} = useAppSelector(selectUser);
+  const [getData, {data}] = useGetAllUserCollectionsMutation();
   const [page] = useState(defaultPage);
   const [limit] = useState(defaultLimit);
 
   useEffect(() => {
-    getData({page, limit});
-  }, []);
+    if (token) {
+      getData({page, limit, token});
+    }
+  }, [token]);
 
   return (
     <Box sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'}}>

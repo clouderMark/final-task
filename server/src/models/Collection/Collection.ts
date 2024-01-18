@@ -7,14 +7,16 @@ import {allCollectionsAttributes, collectionInclude} from './value';
 import FileService from '../../services/FileService';
 
 class Collection {
-  async getAll(options: IOptions) {
+  async getAll(options: IOptions, userId: TId) {
+    const where = {userId};
     const {limit, page} = options;
     const offset = page * limit;
-    const length = await CollectionMapping.count();
+    const length = await CollectionMapping.count({where});
     const collections = await CollectionMapping.findAll({
       offset,
       limit,
       attributes: allCollectionsAttributes,
+      where,
     });
 
     return {collections, numberOfRecords: length};
