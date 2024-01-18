@@ -51,7 +51,7 @@ const CreateCollection = () => {
     data.append('name', name.trim());
     data.append('description', description.trim());
     if (image.image) {
-      data.append('image', image.image);
+      data.append('image', image.image, image.image.name);
     }
 
     data.append('theme', theme);

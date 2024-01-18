@@ -1,8 +1,10 @@
 import sanitizeHtml from 'sanitize-html';
+import {UploadedFile} from 'express-fileupload';
 import {EItemTypeProp, IOptions, TId} from '../../types/types';
 import {Collection as CollectionMapping, ItemPropType} from '../mapping';
 import {IData} from './types';
 import {allCollectionsAttributes, collectionInclude} from './value';
+import FileService from '../../services/FileService';
 
 class Collection {
   async getAll(options: IOptions) {
@@ -28,8 +30,13 @@ class Collection {
     return collection;
   }
 
-  async create(data: IData, userId: TId) {
-    const {name = '', description = '', theme = '', visible = true, image = ''} = data;
+  async create(data: IData, userId: TId, img: UploadedFile | UploadedFile[] | undefined) {
+    const {name = '', description = '', theme = '', visible = true} = data;
+    let image = '';
+
+    if (img && !(img instanceof Array)) {
+      image = await FileService.upload(img);
+    }
 
     const collection = await CollectionMapping.create({
       name,

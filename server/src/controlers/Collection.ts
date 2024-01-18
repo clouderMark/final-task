@@ -51,7 +51,7 @@ class Collection {
       }
 
       const {id} = req.auth;
-      const collection = await CollectionModel.create(req.body, id);
+      const collection = await CollectionModel.create(req.body, id, req.files?.image);
 
       res.json(collection);
     } catch (e: unknown) {
