@@ -76,6 +76,7 @@ class GoogleDriveService {
         mimeType: fileMimeType,
         body: fs.createReadStream(filePath),
       },
+      fields: 'id,name',
     });
   }
 }

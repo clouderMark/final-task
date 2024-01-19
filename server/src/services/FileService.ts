@@ -52,13 +52,15 @@ class FileService {
       folder = await googleDriveService.createFolder(folderName);
     }
 
-    await googleDriveService.saveFile(fileName, filePath, file.mimetype, folder.id).catch((error: unknown) => {
-      console.error(error);
-    });
+    const res = await googleDriveService
+      .saveFile(fileName, filePath, file.mimetype, folder.id)
+      .catch((error: unknown) => {
+        console.error(error);
+      });
 
     this.delete(filePath);
 
-    return fileName;
+    return res.data.id;
   }
 }
 
