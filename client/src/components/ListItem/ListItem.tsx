@@ -16,7 +16,7 @@ const ListItem = (props: IProps) => {
   return (
     <Card sx={card.card} onClick={() => navigate(`/${navigateTo}/${id}`)}>
       {image ? (
-        <CardMedia sx={card.img} component="img" image={process.env.REACT_APP_IMG_URL + image} />
+        <CardMedia sx={card.img} component="img" image={image} />
       ) : (
         <CardMedia sx={card.img} component="img" image="http://via.placeholder.com/335" />
       )}

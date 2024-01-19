@@ -8,3 +8,5 @@ export enum EPath {
   Collection = 'collection',
   CollectionItem = 'collection/:id',
 }
+
+export const GOOGLEAPI = 'https://lh3.google.com/u/0/d/';
