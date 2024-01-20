@@ -23,7 +23,7 @@ const AllCollections = () => {
   }, [token]);
 
   return (
-    <Box sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'}}>
+    <Box sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', mt: 3}}>
       {data ? (
         data.collections.map((el) => (
           <ListItem
