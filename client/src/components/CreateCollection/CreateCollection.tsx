@@ -1,7 +1,8 @@
 import {Box, FormControlLabel, Switch} from '@mui/material';
 import {ChangeEvent, FormEvent, useEffect} from 'react';
 import {Editor} from '@tinymce/tinymce-react';
-import {useCreateCollectionMutation} from '../../redux/collectionApi';
+import {BaseQueryFn, FetchArgs, MutationDefinition} from '@reduxjs/toolkit/dist/query';
+import {UseMutation} from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import {selectUser} from '../LoginUser/redux/userSlice/userSlice';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import DialogWithTitle from '../DialogWithTitle/DialogWithTitle';
@@ -25,16 +26,23 @@ import {
 } from './redux/createCollectionSlice';
 import ThemedTypography from '../ThemedTypography';
 import {styles} from './styles';
-import {reset as closeDialog} from '../DialogWithTitle/dialogWithTitleSlice';
+import {reset as closeDialog, selectDialogWithTitle} from '../DialogWithTitle/dialogWithTitleSlice';
+import {ICollection, ICollectionReq, ICollectionUpdateReq, ICustomError} from '../../types/types';
 
 const API_KEY = process.env.REACT_APP_TINY_API_KEY;
 
-const CreateCollection = () => {
+interface IProps {
+  useSubmit: UseMutation<MutationDefinition<ICollectionReq,BaseQueryFn<string | FetchArgs, unknown, ICustomError, {}>,never,ICollection,'collectionApi'>> | UseMutation<MutationDefinition<ICollectionUpdateReq, BaseQueryFn<string | FetchArgs, unknown, ICustomError, {}>, never, ICollection, "collectionApi">>; // eslint-disable-line
+}
+
+const CreateCollection = (properties: IProps) => {
+  const {useSubmit} = properties;
   const dispatch = useAppDispatch();
   const {name, description, theme, visible, image, props} = useAppSelector(selectCollection);
   const {token} = useAppSelector(selectUser);
   const {lang} = useAppSelector(selectLang);
-  const [send, {isSuccess}] = useCreateCollectionMutation();
+  const [send, {isSuccess}] = useSubmit();
+  const {title, id} = useAppSelector(selectDialogWithTitle);
 
   useEffect(() => {
     if (isSuccess) {
@@ -42,6 +50,12 @@ const CreateCollection = () => {
       dispatch(closeDialog());
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (!title) {
+      dispatch(reset());
+    }
+  }, [title]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -58,7 +72,7 @@ const CreateCollection = () => {
     data.append('visible', `${visible}`);
     data.append('itemPropType', JSON.stringify(props));
 
-    send({data, token});
+    send({data, token, id: id!});
   };
 
   return (
@@ -128,6 +142,7 @@ const CreateCollection = () => {
                     ) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')), // eslint-disable-line
                   }}
                   onEditorChange={(e) => dispatch(setDescription(e))}
+                  value={description}
                 />
               </Box>
             </Box>

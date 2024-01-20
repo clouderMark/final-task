@@ -6,6 +6,7 @@ import ThemedButton from '../components/ThemedButton';
 import {selectLang} from '../components/content/redux/langSlice';
 import {content} from '../components/content/content';
 import AllCollections from '../components/AllCollections';
+import {useCreateCollectionMutation} from '../redux/collectionApi';
 
 const Collections = () => {
   const dispatch = useAppDispatch();
@@ -17,11 +18,11 @@ const Collections = () => {
 
   return (
     <Container>
-      <ThemedButton onClick={handleClickPopUp} variant="outlined">
+      <ThemedButton onClick={handleClickPopUp} variant="outlined" sx={{mt: 3}}>
         {content[lang].collection.create}
       </ThemedButton>
       <AllCollections />
-      <CreateCollection />
+      <CreateCollection useSubmit={useCreateCollectionMutation} />
     </Container>
   );
 };

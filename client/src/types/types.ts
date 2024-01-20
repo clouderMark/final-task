@@ -100,3 +100,25 @@ export interface IImage {
   image: File | null;
   imageUrl: string;
 }
+
+export interface ICollectionReq {
+  token?: TToken | undefined | null;
+  data: FormData;
+}
+
+export interface ICollection {
+  id: number;
+  name: string;
+  description: string;
+  theme: string;
+  image: string;
+  visible: boolean;
+  item_prop_types: {
+    value: string;
+  }[];
+  userId: TId;
+}
+
+export interface ICollectionUpdateReq extends ICollectionReq {
+  id: number
+}

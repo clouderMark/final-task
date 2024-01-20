@@ -79,6 +79,12 @@ class GoogleDriveService {
       fields: 'id,name',
     });
   }
+
+  deleteFile(fileId: string) {
+    return this.driveClient.files.delete({
+      fileId,
+    });
+  }
 }
 
 const driveClientId = process.env.GOOGLE_DRIVE_CLIENT_ID || '';

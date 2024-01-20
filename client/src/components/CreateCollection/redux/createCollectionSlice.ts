@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {SelectChangeEvent} from '@mui/material';
 import type {RootState} from '../../../redux/store';
 import {initialState} from './initialState';
-import {EName} from './types';
+import {EName, IInitialState} from './types';
 
 export const createCollectionSlice = createSlice({
   name: 'createCollection',
@@ -37,10 +37,20 @@ export const createCollectionSlice = createSlice({
     setVisibility: (state, action: PayloadAction<boolean>) => {
       state[EName.VISIBLE] = action.payload;
     },
+    setData: (state, action: PayloadAction<IInitialState>) => {
+      const data = action.payload;
+
+      state[EName.NAME] = data[EName.NAME];
+      state[EName.DESCRIPTION] = data[EName.DESCRIPTION];
+      state[EName.THEME] = data[EName.THEME];
+      state[EName.PROPS] = data[EName.PROPS];
+      state[EName.IMAGE] = data[EName.IMAGE];
+      state[EName.VISIBLE] = data[EName.VISIBLE];
+    },
     reset: () => initialState,
   },
 });
 
 export const selectCollection = (state: RootState) => state.createCollection;
-export const {setImage, setPropType, setName, setDescription, setTheme, setVisibility, reset} =
+export const {setImage, setPropType, setName, setDescription, setTheme, setVisibility, setData, reset} =
   createCollectionSlice.actions;

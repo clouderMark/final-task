@@ -50,6 +50,7 @@ interface IAppContent {
   no: string;
   collection: {
     create: string;
+    edit: string;
     propsType: string;
     name: string;
     desctription: string;

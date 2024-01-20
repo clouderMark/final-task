@@ -1,5 +1,6 @@
 import sanitizeHtml from 'sanitize-html';
 import {UploadedFile} from 'express-fileupload';
+import GoogleDriveService from '../../services/GoogleDriveService';
 import {EItemTypeProp, IOptions, TId} from '../../types/types';
 import {Collection as CollectionMapping, ItemPropType} from '../mapping';
 import {IData} from './types';
@@ -68,7 +69,7 @@ class Collection {
     return created;
   }
 
-  async update(id: TId, data: IData, userId: TId) {
+  async update(id: TId, data: IData, userId: TId, img: UploadedFile | UploadedFile[] | undefined) {
     const where = {id, userId};
     const collection = await CollectionMapping.findOne({where});
 
@@ -81,8 +82,16 @@ class Collection {
       description = collection.description,
       theme = collection.theme,
       visible = collection.visible,
-      image = collection.image,
     } = data;
+
+    let image;
+
+    if (img && !(img instanceof Array)) {
+      image = await FileService.upload(img);
+      if (collection.image) {
+        GoogleDriveService.deleteFile(collection.image);
+      }
+    }
 
     await collection.update({
       name,

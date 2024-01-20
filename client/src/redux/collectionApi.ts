@@ -1,29 +1,20 @@
 import {createApi, fetchBaseQuery, BaseQueryFn, FetchArgs} from '@reduxjs/toolkit/query/react';
-import {ICustomError, INumberOfRecords, IPageLimit, IToken, TId, TToken} from '../types/types';
+import {
+  ICollection,
+  ICollectionReq,
+  ICollectionUpdateReq,
+  ICustomError,
+  INumberOfRecords,
+  IPageLimit,
+  IToken,
+  TToken,
+} from '../types/types';
 
 const BASE_URL = process.env.REACT_APP_API_URL;
-
-interface IReq {
-  token?: TToken | undefined | null;
-  data: FormData;
-}
 
 interface IDelete {
   token?: TToken | undefined | null;
   id: number;
-}
-
-interface ICollection {
-  id: number;
-  name: string;
-  description: string;
-  theme: string;
-  image: string;
-  visible: boolean;
-  item_props_types: {
-    value: string;
-  }[];
-  userId: TId;
 }
 
 interface IAllCollection {
@@ -46,7 +37,7 @@ export const collectionApi = createApi({
     credentials: 'include',
   }) as BaseQueryFn<string | FetchArgs, unknown, ICustomError, {}>,
   endpoints: (builder) => ({
-    createCollection: builder.mutation<ICollection, IReq>({
+    createCollection: builder.mutation<ICollection, ICollectionReq>({
       query: (data) => {
         const req: FetchArgs = {
           url: '/create',
@@ -60,10 +51,10 @@ export const collectionApi = createApi({
       },
     }),
 
-    updateCollection: builder.mutation<ICollection, IReq>({
+    updateCollection: builder.mutation<ICollection, ICollectionUpdateReq>({
       query: (data) => {
         const req: FetchArgs = {
-          url: '/update',
+          url: `/update/${data.id}`,
           method: 'PUT',
           body: data.data,
         };

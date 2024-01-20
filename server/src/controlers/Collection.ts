@@ -77,7 +77,7 @@ class Collection {
       }
 
       const {id} = req.auth;
-      const collection = await CollectionModel.update(+req.params.id, req.body, id);
+      const collection = await CollectionModel.update(+req.params.id, req.body, id, req.files?.image);
 
       res.json(collection);
     } catch (e: unknown) {

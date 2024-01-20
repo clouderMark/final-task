@@ -54,6 +54,7 @@ export const content: IContent = {
     no: 'No',
     collection: {
       create: 'Create collection',
+      edit: 'Edit collection',
       propsType: 'Properties type',
       name: 'Collection name',
       desctription: 'Description to collection',
@@ -112,6 +113,7 @@ export const content: IContent = {
     no: 'Не',
     collection: {
       create: 'Стварыць калекцыю',
+      edit: 'Рэдагаваць калекцыю',
       propsType: 'Тып уласцівасцяў',
       name: 'Назва калекцыі',
       desctription: 'Апісанне да калекцыі',
