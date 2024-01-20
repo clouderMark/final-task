@@ -21,7 +21,7 @@ export const card = {
   },
   img: {
     width: '100%',
-    maxHeight: '230px',
+    height: '230px',
     [`@media (max-width: ${tabletSize}px)`]: {
       maxHeight: '246px',
     },
