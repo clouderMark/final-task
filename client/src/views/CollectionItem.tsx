@@ -79,11 +79,18 @@ const CollectionItem = () => {
             </Box>
           ) : null}
           <Box sx={{mt: 3}}>
-            <Box
-              component="img"
-              sx={{width: '100%', maxWidth: '700px', mr: 4, float: 'left'}}
-              src={GOOGLEAPI + data.image}
-            />
+            {data.image ? (
+              <Box
+                component="img"
+                sx={{
+                  width: '100%',
+                  maxWidth: '700px',
+                  mr: 4,
+                  float: 'left',
+                }}
+                src={GOOGLEAPI + data.image}
+              />
+            ) : null}
             <ThemedTypography component="h2" sx={{fontSize: '24px'}}>
               {data.name}
             </ThemedTypography>
