@@ -31,6 +31,7 @@ export const content: IContent = {
       logout: 'Logout',
       adminUsers: 'Users',
       collections: 'Collections',
+      allitems: 'Main',
     },
     adminUser: {
       blocked: 'blocked',
@@ -52,6 +53,7 @@ export const content: IContent = {
     change: 'Change',
     add: 'Add',
     no: 'No',
+    listIsEmty: 'List is empty',
     collection: {
       create: 'Create collection',
       edit: 'Edit collection',
@@ -90,6 +92,7 @@ export const content: IContent = {
       logout: 'Выйсці',
       adminUsers: 'Карыстальнікі',
       collections: 'Калекцыі',
+      allitems: 'Галоўная',
     },
     adminUser: {
       blocked: 'заблакаваны',
@@ -111,6 +114,7 @@ export const content: IContent = {
     change: 'Змяніць',
     add: 'Дабавіць',
     no: 'Не',
+    listIsEmty: 'Спісак пуст',
     collection: {
       create: 'Стварыць калекцыю',
       edit: 'Рэдагаваць калекцыю',

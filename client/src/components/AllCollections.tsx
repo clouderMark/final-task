@@ -7,12 +7,15 @@ import {EPath} from '../types/EPath';
 import {selectUser} from './LoginUser/redux/userSlice/userSlice';
 import {useAppSelector} from '../redux/hooks';
 import {selectDialogWithTitle} from './DialogWithTitle/dialogWithTitleSlice';
+import {content} from './content/content';
+import {selectLang} from './content/redux/langSlice';
 
 const defaultLimit = 9;
 const defaultPage = 1;
 
 const AllCollections = () => {
   const {token} = useAppSelector(selectUser);
+  const {lang} = useAppSelector(selectLang);
   const [getData, {data}] = useGetAllUserCollectionsMutation();
   const [limit] = useState(defaultLimit);
   const {title} = useAppSelector(selectDialogWithTitle);
@@ -61,8 +64,8 @@ const AllCollections = () => {
           ) : null}
         </Box>
       ) : (
-        <ThemedTypography component="p" sx={{mb: 10}}>
-          По вашему запросу ничего не найдено
+        <ThemedTypography component="p" sx={{mb: 10, mt: 3}}>
+          {content[lang].listIsEmty}
         </ThemedTypography>
       )}
     </Box>

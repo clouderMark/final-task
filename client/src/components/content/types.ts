@@ -27,6 +27,7 @@ interface IAppContent {
     logout: string;
     adminUsers: string;
     collections: string;
+    allitems: string;
   },
   adminUser: {
     blocked: string;
@@ -48,6 +49,7 @@ interface IAppContent {
   change: string;
   add: string;
   no: string;
+  listIsEmty: string;
   collection: {
     create: string;
     edit: string;
