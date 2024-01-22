@@ -9,6 +9,7 @@ import {userApi} from './userApi';
 import {collectionApi} from './collectionApi';
 import {dialogWithTitleSlice} from '../components/DialogWithTitle/dialogWithTitleSlice';
 import {createCollectionSlice} from '../components/CreateCollection/redux/createCollectionSlice';
+import {itemApi} from './itemApi';
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
     [collectionApi.reducerPath]: collectionApi.reducer,
     dialogWithTitle: dialogWithTitleSlice.reducer,
     createCollection: createCollectionSlice.reducer,
+    [itemApi.reducerPath]: itemApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -29,7 +31,8 @@ export const store = configureStore({
     })
       .concat(loginApi.middleware)
       .concat(userApi.middleware)
-      .concat(collectionApi.middleware),
+      .concat(collectionApi.middleware)
+      .concat(itemApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

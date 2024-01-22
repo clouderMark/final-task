@@ -29,26 +29,6 @@ class Collection {
     }
   }
 
-  async getAbsolutelyAll(req: Request, res: Response, next: NextFunction) {
-    try {
-      const {limit = null, page = null} = req.query;
-
-      const numLimit =
-        limit && /[0-9]+/.test(limit.toString()) && parseInt(limit.toString()) ? parseInt(limit.toString()) : 3;
-      const numPage =
-        page && /[0-9]+/.test(page.toString()) && parseInt(page.toString()) >= 0 ? parseInt(page.toString()) : 1;
-
-      const options = {limit: numLimit, page: numPage};
-      const users = await CollectionModel.getAbsolutelyAll(options);
-
-      res.json(users);
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        next(AppError.badRequest(e.message));
-      }
-    }
-  }
-
   async getOne(req: Request, res: Response, next: NextFunction) {
     try {
       const {id} = req.params;

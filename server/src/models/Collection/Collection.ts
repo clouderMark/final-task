@@ -2,7 +2,7 @@ import sanitizeHtml from 'sanitize-html';
 import {UploadedFile} from 'express-fileupload';
 import GoogleDriveService from '../../services/GoogleDriveService';
 import {EItemTypeProp, IOptions, TId} from '../../types/types';
-import {Collection as CollectionMapping, ItemPropType, Item as ItemMapping} from '../mapping';
+import {Collection as CollectionMapping, ItemPropType} from '../mapping';
 import {IData} from './types';
 import {allCollectionsAttributes, collectionInclude} from './value';
 import FileService from '../../services/FileService';
@@ -21,18 +21,6 @@ class Collection {
     });
 
     return {collections, numberOfRecords: length};
-  }
-
-  async getAbsolutelyAll(options: IOptions) {
-    const {limit, page} = options;
-    const offset = page * limit;
-    const length = await ItemMapping.count();
-    const items = await ItemMapping.findAll({
-      offset,
-      limit,
-    });
-
-    return {items, numberOfRecords: length};
   }
 
   async getOne(id: TId) {

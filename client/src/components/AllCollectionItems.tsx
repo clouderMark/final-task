@@ -1,6 +1,6 @@
 import {ChangeEvent, useEffect, useState} from 'react';
 import {Box, Pagination} from '@mui/material';
-import {useGetAllItemsMutation} from '../redux/collectionApi';
+import {useGetAllItemsMutation} from '../redux/itemApi';
 import ThemedTypography from './ThemedTypography';
 import {useAppSelector} from '../redux/hooks';
 import {selectLang} from './content/redux/langSlice';
