@@ -7,6 +7,8 @@ export interface IInitialState {
   [EName.VISIBLE]: boolean;
   [EName.PROPS]: string[];
   [EName.IMAGE]: IImage;
+  [EName.TITLE]: string;
+  [EName.ID]?: number | undefined;
 }
 
 export enum EName {
@@ -16,4 +18,6 @@ export enum EName {
   IMAGE = 'image',
   VISIBLE = 'visible',
   PROPS = 'props',
+  TITLE = 'title',
+  ID = 'id',
 }

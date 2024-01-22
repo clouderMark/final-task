@@ -7,7 +7,6 @@ import {langSlice} from '../components/content/redux/langSlice';
 import {themeSlice} from '../styles/themeSlice/themeSlice';
 import {userApi} from './userApi';
 import {collectionApi} from './collectionApi';
-import {dialogWithTitleSlice} from '../components/DialogWithTitle/dialogWithTitleSlice';
 import {createCollectionSlice} from '../components/CreateCollection/redux/createCollectionSlice';
 import {itemApi} from './itemApi';
 
@@ -21,7 +20,6 @@ export const store = configureStore({
     theme: themeSlice.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [collectionApi.reducerPath]: collectionApi.reducer,
-    dialogWithTitle: dialogWithTitleSlice.reducer,
     createCollection: createCollectionSlice.reducer,
     [itemApi.reducerPath]: itemApi.reducer,
   },

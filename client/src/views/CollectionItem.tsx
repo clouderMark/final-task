@@ -16,9 +16,10 @@ import {content} from '../components/content/content';
 import {theme} from '../styles/theme';
 import {selectTheme} from '../styles/themeSlice/themeSlice';
 import CreateCollection from '../components/CreateCollection/CreateCollection';
-import {selectDialogWithTitle, setShow} from '../components/DialogWithTitle/dialogWithTitleSlice';
-import {setData} from '../components/CreateCollection/redux/createCollectionSlice';
+import {selectCollection, setData} from '../components/CreateCollection/redux/createCollectionSlice';
 import {selectUser} from '../components/LoginUser/redux/userSlice/userSlice';
+import CreateItem from '../components/CreateItem/CreateItem';
+import ThemedButton from '../components/ThemedButton';
 
 const CollectionItem = () => {
   const dispatch = useAppDispatch();
@@ -30,7 +31,7 @@ const CollectionItem = () => {
   const {type} = useAppSelector(selectTheme);
   const {id: userId} = useAppSelector(selectUser);
   const navigate = useNavigate();
-  const {title} = useAppSelector(selectDialogWithTitle);
+  const {title} = useAppSelector(selectCollection);
 
   useEffect(() => {
     getData({id});
@@ -43,7 +44,6 @@ const CollectionItem = () => {
   }, [isDeleteSuccess]);
 
   const handleEditCLick = () => {
-    dispatch(setShow({title: content[lang].collection.edit, id}));
     if (data) {
       dispatch(
         setData({
@@ -56,6 +56,8 @@ const CollectionItem = () => {
             image: null,
             imageUrl: GOOGLEAPI + data.image,
           },
+          title: content[lang].collection.edit,
+          id,
         }),
       );
     }
@@ -63,6 +65,10 @@ const CollectionItem = () => {
 
   const handleDeleteCLick = () => {
     deleteItem({token, id});
+  };
+
+  const handleCreateClick = () => {
+    console.log('create item');
   };
 
   return (
@@ -100,7 +106,9 @@ const CollectionItem = () => {
               {content[lang].collection.theme}: {data.theme}
             </ThemedTypography>
           </Box>
+          <ThemedButton onClick={handleCreateClick}>Создать айтем</ThemedButton>
           <CreateCollection useSubmit={useUpdateCollectionMutation} />
+          <CreateItem />
         </>
       ) : (
         <ThemedTypography>ЧТо то пошло не так</ThemedTypography>

@@ -8,6 +8,10 @@ export const createCollectionSlice = createSlice({
   name: 'createCollection',
   initialState,
   reducers: {
+    setShow: (state, action: PayloadAction<{title: IInitialState[EName.TITLE]; id?: IInitialState[EName.ID]}>) => {
+      state.title = action.payload.title;
+      state.id = action.payload.id;
+    },
     setImage: (state, action: PayloadAction<FileList | null>) => {
       const files = action.payload;
 
@@ -46,11 +50,13 @@ export const createCollectionSlice = createSlice({
       state[EName.PROPS] = data[EName.PROPS];
       state[EName.IMAGE] = data[EName.IMAGE];
       state[EName.VISIBLE] = data[EName.VISIBLE];
+      state[EName.TITLE] = data[EName.TITLE];
+      state[EName.ID] = data[EName.ID];
     },
     reset: () => initialState,
   },
 });
 
 export const selectCollection = (state: RootState) => state.createCollection;
-export const {setImage, setPropType, setName, setDescription, setTheme, setVisibility, setData, reset} =
+export const {setShow, setImage, setPropType, setName, setDescription, setTheme, setVisibility, setData, reset} =
   createCollectionSlice.actions;

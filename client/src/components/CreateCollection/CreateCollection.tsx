@@ -5,7 +5,7 @@ import {BaseQueryFn, FetchArgs, MutationDefinition} from '@reduxjs/toolkit/dist/
 import {UseMutation} from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import {selectUser} from '../LoginUser/redux/userSlice/userSlice';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
-import DialogWithTitle from '../DialogWithTitle/DialogWithTitle';
+import DialogWithTitle from '../DialogWithTitle';
 import ThemedButton from '../ThemedButton';
 import {selectLang} from '../content/redux/langSlice';
 import {content} from '../content/content';
@@ -26,7 +26,6 @@ import {
 } from './redux/createCollectionSlice';
 import ThemedTypography from '../ThemedTypography';
 import {styles} from './styles';
-import {reset as closeDialog, selectDialogWithTitle} from '../DialogWithTitle/dialogWithTitleSlice';
 import {ICollection, ICollectionReq, ICollectionUpdateReq, ICustomError} from '../../types/types';
 
 const API_KEY = process.env.REACT_APP_TINY_API_KEY;
@@ -38,16 +37,14 @@ interface IProps {
 const CreateCollection = (properties: IProps) => {
   const {useSubmit} = properties;
   const dispatch = useAppDispatch();
-  const {name, description, theme, visible, image, props} = useAppSelector(selectCollection);
+  const {name, description, theme, visible, image, props, title, id} = useAppSelector(selectCollection);
   const {token} = useAppSelector(selectUser);
   const {lang} = useAppSelector(selectLang);
   const [send, {isSuccess}] = useSubmit();
-  const {title, id} = useAppSelector(selectDialogWithTitle);
 
   useEffect(() => {
     if (isSuccess) {
       dispatch(reset());
-      dispatch(closeDialog());
     }
   }, [isSuccess]);
 
@@ -77,6 +74,8 @@ const CreateCollection = (properties: IProps) => {
 
   return (
     <DialogWithTitle
+      title={title}
+      onClose={reset}
       child={
         <Box noValidate onSubmit={handleSubmit} component="form">
           <Box sx={styles.box}>

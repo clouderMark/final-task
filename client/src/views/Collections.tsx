@@ -1,7 +1,7 @@
 import {Container} from '@mui/material';
 import CreateCollection from '../components/CreateCollection/CreateCollection';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
-import {setShow} from '../components/DialogWithTitle/dialogWithTitleSlice';
+import {setShow} from '../components/CreateCollection/redux/createCollectionSlice';
 import ThemedButton from '../components/ThemedButton';
 import {selectLang} from '../components/content/redux/langSlice';
 import {content} from '../components/content/content';

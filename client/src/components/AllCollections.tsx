@@ -6,7 +6,7 @@ import ListItem from './ListItem/ListItem';
 import {EPath} from '../types/EPath';
 import {selectUser} from './LoginUser/redux/userSlice/userSlice';
 import {useAppSelector} from '../redux/hooks';
-import {selectDialogWithTitle} from './DialogWithTitle/dialogWithTitleSlice';
+import {selectCollection} from './CreateCollection/redux/createCollectionSlice';
 import {content} from './content/content';
 import {selectLang} from './content/redux/langSlice';
 
@@ -18,7 +18,7 @@ const AllCollections = () => {
   const {lang} = useAppSelector(selectLang);
   const [getData, {data}] = useGetAllUserCollectionsMutation();
   const [limit] = useState(defaultLimit);
-  const {title} = useAppSelector(selectDialogWithTitle);
+  const {title} = useAppSelector(selectCollection);
   const [page, setPage] = useState(defaultPage);
 
   const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {

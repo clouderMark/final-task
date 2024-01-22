@@ -7,4 +7,6 @@ export const initialState: IInitialState = {
   [EName.VISIBLE]: true,
   [EName.PROPS]: [],
   [EName.IMAGE]: {image: null, imageUrl: ''},
+  [EName.TITLE]: '',
+  [EName.ID]: undefined,
 };
