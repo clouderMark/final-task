@@ -33,21 +33,18 @@ const Bar = () => {
     <AppBar sx={{backgroundColor: theme.palette.first[type], borderBottom: `0.5px solid ${theme.palette.third[type]}`}}>
       <Toolbar sx={{}}>
         {isAdmin ? (
-          <ThemedButton
-            onClick={() => navigate(EPath.AdminUsers, {replace: true})}
-            sx={{m: 1}}
-          >
+          <ThemedButton onClick={() => navigate(EPath.AdminUsers, {replace: true})} sx={{m: 1}}>
             {content[lang].bar.adminUsers}
           </ThemedButton>
         ) : null}
         {isAuth ? (
-          <ThemedButton
-            onClick={() => navigate(EPath.Collections, {replace: true})}
-            sx={{m: 1}}
-          >
+          <ThemedButton onClick={() => navigate(EPath.Collections, {replace: true})} sx={{m: 1}}>
             {content[lang].bar.collections}
           </ThemedButton>
         ) : null}
+        <ThemedButton onClick={() => navigate(EPath.AllItems, {replace: true})} sx={{m: 1}}>
+          {content[lang].bar.allitems}
+        </ThemedButton>
         <Box sx={{ml: 'auto'}}>
           {isAuth ? (
             <ThemedButton

@@ -28,6 +28,18 @@ interface IRes extends INumberOfRecords {
   collections: IAllCollection[];
 }
 
+interface IItem {
+  id: number;
+  name: string;
+  collection: string;
+  authorName: string;
+  image: string;
+}
+
+interface IAllItems extends INumberOfRecords {
+  items: IItem[];
+}
+
 interface IPageLimitToken extends IPageLimit, IToken {}
 
 export const collectionApi = createApi({
@@ -84,6 +96,23 @@ export const collectionApi = createApi({
       },
     }),
 
+    getAllItems: builder.mutation<IAllItems, IPageLimit>({
+      query: (data) => {
+        const {page, limit} = data;
+
+        const req: FetchArgs = {
+          url: '/getall',
+          method: 'GET',
+          params: {
+            page,
+            limit,
+          },
+        };
+
+        return req;
+      },
+    }),
+
     getOneCollection: builder.mutation<ICollection, {id: number}>({
       query: (data) => ({
         url: `/getone/${data.id}`,
@@ -112,4 +141,5 @@ export const {
   useUpdateCollectionMutation,
   useGetAllUserCollectionsMutation,
   useDeleteCollectionMutation,
+  useGetAllItemsMutation,
 } = collectionApi;
