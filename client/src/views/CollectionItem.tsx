@@ -16,7 +16,7 @@ import {content} from '../components/content/content';
 import {theme} from '../styles/theme';
 import {selectTheme} from '../styles/themeSlice/themeSlice';
 import CreateCollection from '../components/CreateCollection/CreateCollection';
-import {setShow} from '../components/DialogWithTitle/dialogWithTitleSlice';
+import {selectDialogWithTitle, setShow} from '../components/DialogWithTitle/dialogWithTitleSlice';
 import {setData} from '../components/CreateCollection/redux/createCollectionSlice';
 import {selectUser} from '../components/LoginUser/redux/userSlice/userSlice';
 
@@ -30,10 +30,11 @@ const CollectionItem = () => {
   const {type} = useAppSelector(selectTheme);
   const {id: userId} = useAppSelector(selectUser);
   const navigate = useNavigate();
+  const {title} = useAppSelector(selectDialogWithTitle);
 
   useEffect(() => {
     getData({id});
-  }, [id]);
+  }, [id, title]);
 
   useEffect(() => {
     if (isDeleteSuccess) {
@@ -79,7 +80,7 @@ const CollectionItem = () => {
             </Box>
           ) : null}
           <Box sx={{mt: 3}}>
-            {data.image ? (
+            {data.image.length ? (
               <Box
                 component="img"
                 sx={{
