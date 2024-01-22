@@ -1,6 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import {Card, CardMedia, CardContent, Typography} from '@mui/material';
 import {card} from './styles';
+import {GOOGLEAPI} from '../../types/EPath';
 
 interface IProps {
   navigateTo: string;
@@ -16,7 +17,7 @@ const ListItem = (props: IProps) => {
   return (
     <Card sx={card.card} onClick={() => navigate(`/${navigateTo}/${id}`)}>
       {image ? (
-        <CardMedia sx={card.img} component="img" image={image} />
+        <CardMedia sx={card.img} component="img" image={GOOGLEAPI + image} />
       ) : (
         <CardMedia sx={card.img} component="img" image="http://via.placeholder.com/335" />
       )}

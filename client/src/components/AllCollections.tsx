@@ -3,7 +3,7 @@ import {Box} from '@mui/material';
 import {useGetAllUserCollectionsMutation} from '../redux/collectionApi';
 import ThemedTypography from './ThemedTypography';
 import ListItem from './ListItem/ListItem';
-import {EPath, GOOGLEAPI} from '../types/EPath';
+import {EPath} from '../types/EPath';
 import {selectUser} from './LoginUser/redux/userSlice/userSlice';
 import {useAppSelector} from '../redux/hooks';
 
@@ -29,7 +29,7 @@ const AllCollections = () => {
           <ListItem
             id={el.id}
             navigateTo={EPath.Collection}
-            image={GOOGLEAPI + el.image}
+            image={el.image}
             key={el.id}
             child={
               <>
