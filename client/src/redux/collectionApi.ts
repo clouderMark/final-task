@@ -111,4 +111,5 @@ export const {
   useCreateCollectionMutation,
   useUpdateCollectionMutation,
   useGetAllUserCollectionsMutation,
+  useDeleteCollectionMutation,
 } = collectionApi;

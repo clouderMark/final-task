@@ -1,10 +1,15 @@
 import {useEffect} from 'react';
 import {Box, Container, IconButton} from '@mui/material';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
-import {useParams} from 'react-router-dom';
-import {useGetOneCollectionMutation, useUpdateCollectionMutation} from '../redux/collectionApi';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
+import {useNavigate, useParams} from 'react-router-dom';
+import {
+  useDeleteCollectionMutation,
+  useGetOneCollectionMutation,
+  useUpdateCollectionMutation,
+} from '../redux/collectionApi';
 import ThemedTypography from '../components/ThemedTypography';
-import {GOOGLEAPI} from '../types/EPath';
+import {EPath, GOOGLEAPI} from '../types/EPath';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {selectLang} from '../components/content/redux/langSlice';
 import {content} from '../components/content/content';
@@ -18,14 +23,23 @@ import {selectUser} from '../components/LoginUser/redux/userSlice/userSlice';
 const CollectionItem = () => {
   const dispatch = useAppDispatch();
   const id: number = Number(useParams().id);
+  const {token} = useAppSelector(selectUser);
   const [getData, {data}] = useGetOneCollectionMutation();
+  const [deleteItem, {isSuccess: isDeleteSuccess}] = useDeleteCollectionMutation();
   const {lang} = useAppSelector(selectLang);
   const {type} = useAppSelector(selectTheme);
   const {id: userId} = useAppSelector(selectUser);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getData({id});
   }, [id]);
+
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      navigate(EPath.Collections, {replace: true});
+    }
+  }, [isDeleteSuccess]);
 
   const handleEditCLick = () => {
     dispatch(setShow({title: content[lang].collection.edit, id}));
@@ -46,17 +60,24 @@ const CollectionItem = () => {
     }
   };
 
+  const handleDeleteCLick = () => {
+    deleteItem({token, id});
+  };
+
   return (
     <Container>
       {data ? (
         <>
           {userId === data.userId ? (
-            <IconButton onClick={handleEditCLick} sx={{m: 1, color: theme.palette.third[type], ml: 'auto'}}>
-              <EditRoundedIcon />
-            </IconButton>
+            <Box sx={{display: 'flex'}}>
+              <IconButton onClick={handleEditCLick} sx={{m: 1, color: theme.palette.third[type], ml: 'auto'}}>
+                <EditRoundedIcon />
+              </IconButton>
+              <IconButton onClick={handleDeleteCLick} sx={{m: 1, color: theme.palette.third[type]}}>
+                <DeleteOutlineRoundedIcon />
+              </IconButton>
+            </Box>
           ) : null}
-          <Box sx={{display: 'flex'}}>
-          </Box>
           <Box sx={{mt: 3}}>
             <Box
               component="img"
