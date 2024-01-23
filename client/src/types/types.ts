@@ -122,3 +122,10 @@ export interface ICollection {
 export interface ICollectionUpdateReq extends ICollectionReq {
   id: number
 }
+
+export interface IParagraphs<T> {
+  unique: string;
+  id: null | number;
+  value: T;
+  key: string;
+}

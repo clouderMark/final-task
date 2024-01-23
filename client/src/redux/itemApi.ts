@@ -1,5 +1,6 @@
 import {createApi, fetchBaseQuery, BaseQueryFn, FetchArgs} from '@reduxjs/toolkit/query/react';
 import {
+  ICollectionReq,
   ICustomError,
   INumberOfRecords,
   IPageLimit,
@@ -42,7 +43,21 @@ export const itemApi = createApi({
         return req;
       },
     }),
+
+    createItem: builder.mutation<IItem, ICollectionReq>({
+      query: (data) => {
+        const req: FetchArgs = {
+          url: '/create',
+          method: 'POST',
+          body: data.data,
+        };
+
+        if (data.token) req.headers = {authorization: `Bearer ${data.token}`};
+
+        return req;
+      },
+    }),
   }),
 });
 
-export const {useGetAllItemsMutation} = itemApi;
+export const {useGetAllItemsMutation, useCreateItemMutation} = itemApi;

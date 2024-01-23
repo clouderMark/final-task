@@ -20,6 +20,7 @@ import {selectCollection, setData} from '../components/CreateCollection/redux/cr
 import {selectUser} from '../components/LoginUser/redux/userSlice/userSlice';
 import CreateItem from '../components/CreateItem/CreateItem';
 import ThemedButton from '../components/ThemedButton';
+import {setShow} from '../components/CreateItem/redux/createItemSlice';
 
 const CollectionItem = () => {
   const dispatch = useAppDispatch();
@@ -68,7 +69,7 @@ const CollectionItem = () => {
   };
 
   const handleCreateClick = () => {
-    console.log('create item');
+    dispatch(setShow({title: content[lang].item.create}));
   };
 
   return (
@@ -106,7 +107,11 @@ const CollectionItem = () => {
               {content[lang].collection.theme}: {data.theme}
             </ThemedTypography>
           </Box>
-          <ThemedButton onClick={handleCreateClick}>Создать айтем</ThemedButton>
+          <Box sx={{display: 'flex'}}>
+            <ThemedButton onClick={handleCreateClick} sx={{ml: 'auto'}}>
+              {content[lang].item.create}
+            </ThemedButton>
+          </Box>
           <CreateCollection useSubmit={useUpdateCollectionMutation} />
           <CreateItem />
         </>

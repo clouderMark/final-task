@@ -102,7 +102,7 @@ export interface IItemModel extends Model<InferAttributes<IItemModel>, InferCrea
   [EField.ID]: CreationOptional<TId>;
   [EField.NAME]: TName;
   [EField.IMAGE]: string;
-  [EField.VISIBLE]: boolean;
+  collectionId?: TId;
 }
 
 export interface ITagModel extends Model<InferAttributes<ITagModel>, InferCreationAttributes<ITagModel>> {
@@ -143,4 +143,11 @@ export interface IItemDateModel
 export interface IOptions {
   page: number;
   limit: number;
+}
+
+export interface IParagraphs<T> {
+  unique: string;
+  id: null | number;
+  value: T;
+  key: string;
 }

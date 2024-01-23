@@ -57,5 +57,14 @@ interface IAppContent {
     name: string;
     desctription: string;
     theme: string;
+  },
+  item: {
+    create: string;
+    itemName: string;
+    addString: string;
+    addBool: string;
+    addInt: string;
+    addText: string;
+    addDate: string;
   }
 }

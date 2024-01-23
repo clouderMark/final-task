@@ -54,7 +54,6 @@ const Item = sequelize.define<IItemModel>('item', {
   id,
   [EField.NAME]: {type: DataTypes.STRING, allowNull: false},
   [EField.IMAGE]: {type: DataTypes.STRING, allowNull: false},
-  [EField.VISIBLE]: {type: DataTypes.BOOLEAN, defaultValue: true},
 });
 
 const Tag = sequelize.define<ITagModel>('tag', {

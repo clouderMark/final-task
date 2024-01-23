@@ -1,4 +1,5 @@
 import {createApi, fetchBaseQuery, BaseQueryFn, FetchArgs} from '@reduxjs/toolkit/query/react';
+import {createSlice} from '@reduxjs/toolkit';
 import {
   ICollection,
   ICollectionReq,
@@ -7,8 +8,10 @@ import {
   INumberOfRecords,
   IPageLimit,
   IToken,
+  TId,
   TToken,
 } from '../types/types';
+import type {RootState} from './store';
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -105,6 +108,30 @@ export const collectionApi = createApi({
     }),
   }),
 });
+
+interface ICollectionInitialState {
+  itemPropTypes: string[];
+  id: TId | null;
+}
+
+const collectionInitialState: ICollectionInitialState = {
+  itemPropTypes: [],
+  id: null,
+};
+
+export const collectionSlice = createSlice({
+  name: 'collectionSlice',
+  initialState: collectionInitialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addMatcher(collectionApi.endpoints.getOneCollection.matchFulfilled, (state, {payload}) => {
+      state.itemPropTypes = payload.item_prop_types.map((el) => el.value);
+      state.id = payload.id;
+    });
+  },
+});
+
+export const selectCollection = (state: RootState) => state.collection;
 
 export const {
   useGetOneCollectionMutation,

@@ -1,4 +1,5 @@
 import {NextFunction, Request, Response} from 'express';
+import {IAuthRequest} from 'src/types/types';
 import ItemModel from '../models/Item';
 import AppError from '../errors/AppError';
 
@@ -16,6 +17,24 @@ class Item {
       const users = await ItemModel.getAll(options);
 
       res.json(users);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        next(AppError.badRequest(e.message));
+      }
+    }
+  }
+
+  async create(req: IAuthRequest, res: Response, next: NextFunction) {
+    try {
+      if (Object.keys(req.body).length === 0) {
+        throw new Error('Нет данных для создания');
+      } else if (!req.body.collectionId) {
+        throw new Error('Item не имеет id родителя');
+      }
+
+      const item = await ItemModel.create(req.body, req.files?.image);
+
+      res.json(item);
     } catch (e: unknown) {
       if (e instanceof Error) {
         next(AppError.badRequest(e.message));

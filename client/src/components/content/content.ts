@@ -62,6 +62,15 @@ export const content: IContent = {
       desctription: 'Description to collection',
       theme: 'Collection theme',
     },
+    item: {
+      create: 'Create item',
+      itemName: 'Item name',
+      addString: 'Add string',
+      addBool: 'Add boolean',
+      addInt: 'Add integer',
+      addText: 'Add text',
+      addDate: 'Add date',
+    },
   },
   [ELang.BEL]: {
     login: {
@@ -122,6 +131,15 @@ export const content: IContent = {
       name: 'Назва калекцыі',
       desctription: 'Апісанне да калекцыі',
       theme: 'Тэма калекцыі',
+    },
+    item: {
+      create: 'Стварыць элемент',
+      itemName: 'Назва элемента',
+      addString: 'Дабавіць палоску',
+      addBool: 'Дабавіць лагічны тып',
+      addInt: 'Дабавіць цэлую лічбу',
+      addText: 'Дабавіць тэкст',
+      addDate: 'Дабавіць дату',
     },
   },
 };

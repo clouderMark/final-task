@@ -6,9 +6,10 @@ import {loginApi} from '../components/LoginUser/redux/loginApi';
 import {langSlice} from '../components/content/redux/langSlice';
 import {themeSlice} from '../styles/themeSlice/themeSlice';
 import {userApi} from './userApi';
-import {collectionApi} from './collectionApi';
+import {collectionApi, collectionSlice} from './collectionApi';
 import {createCollectionSlice} from '../components/CreateCollection/redux/createCollectionSlice';
 import {itemApi} from './itemApi';
+import {createItemSlice} from '../components/CreateItem/redux/createItemSlice';
 
 export const store = configureStore({
   reducer: {
@@ -20,8 +21,10 @@ export const store = configureStore({
     theme: themeSlice.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [collectionApi.reducerPath]: collectionApi.reducer,
+    collection: collectionSlice.reducer,
     createCollection: createCollectionSlice.reducer,
     [itemApi.reducerPath]: itemApi.reducer,
+    createItem: createItemSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
