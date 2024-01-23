@@ -41,6 +41,19 @@ class Item {
       }
     }
   }
+
+  async getAllById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const {id} = req.params;
+      const items = await ItemModel.getAllById(id);
+
+      res.json(items);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        next(AppError.badRequest(e.message));
+      }
+    }
+  }
 }
 
 export default new Item();

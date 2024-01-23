@@ -11,6 +11,7 @@ import {
   ItemTextProps,
 } from './mapping';
 import FileService from '../services/FileService';
+import {createdUpdated} from './createdUpdated';
 
 interface IData {
   name: string;
@@ -115,6 +116,13 @@ class Item {
     }
 
     return item;
+  }
+
+  async getAllById(collectionId: string) {
+    const where = {collectionId};
+    const items = await ItemMapping.findAll({where, attributes: {exclude: createdUpdated}});
+
+    return items;
   }
 }
 

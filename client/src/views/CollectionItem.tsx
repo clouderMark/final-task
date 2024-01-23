@@ -21,6 +21,7 @@ import {selectUser} from '../components/LoginUser/redux/userSlice/userSlice';
 import CreateItem from '../components/CreateItem/CreateItem';
 import ThemedButton from '../components/ThemedButton';
 import {setShow} from '../components/CreateItem/redux/createItemSlice';
+import AllItemsCollection from '../components/AllItemsCollection';
 
 const CollectionItem = () => {
   const dispatch = useAppDispatch();
@@ -112,6 +113,7 @@ const CollectionItem = () => {
               {content[lang].item.create}
             </ThemedButton>
           </Box>
+          <AllItemsCollection />
           <CreateCollection useSubmit={useUpdateCollectionMutation} />
           <CreateItem />
         </>

@@ -11,8 +11,8 @@ const BASE_URL = process.env.REACT_APP_API_URL;
 interface IItem {
   id: number;
   name: string;
-  collection: string;
-  authorName: string;
+  collectionId: string;
+  authorName?: string;
   image: string;
 }
 
@@ -57,7 +57,18 @@ export const itemApi = createApi({
         return req;
       },
     }),
+
+    getItemsById: builder.mutation<IItem[], {id: number}>({
+      query: (data) => {
+        const req: FetchArgs = {
+          url: `/getbyid/${data.id}`,
+          method: 'GET',
+        };
+
+        return req;
+      },
+    }),
   }),
 });
 
-export const {useGetAllItemsMutation, useCreateItemMutation} = itemApi;
+export const {useGetAllItemsMutation, useCreateItemMutation, useGetItemsByIdMutation} = itemApi;
