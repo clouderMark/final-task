@@ -42,7 +42,7 @@ const Bar = () => {
             {content[lang].bar.collections}
           </ThemedButton>
         ) : null}
-        <ThemedButton onClick={() => navigate(EPath.AllItems, {replace: true})} sx={{m: 1}}>
+        <ThemedButton onClick={() => navigate(EPath.Main, {replace: true})} sx={{m: 1}}>
           {content[lang].bar.allitems}
         </ThemedButton>
         <Box sx={{ml: 'auto'}}>

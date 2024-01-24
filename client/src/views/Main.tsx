@@ -1,5 +1,10 @@
 import {Container} from '@mui/material';
+import AllCollectionItems from '../components/AllCollectionItems';
 
-const Main = () => <Container maxWidth={false}></Container>;
+const Main = () => (
+  <Container>
+    <AllCollectionItems />
+  </Container>
+);
 
 export default Main;

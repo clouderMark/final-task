@@ -7,7 +7,6 @@ export enum EPath {
   Collections = '/collections',
   Collection = 'collection',
   CollectionItem = 'collection/:id',
-  AllItems = '/allitems',
   Item = 'item',
   ItemId = 'item/:id',
 }
