@@ -1,4 +1,4 @@
-import {ChangeEvent, FormEvent} from 'react';
+import {ChangeEvent, FormEvent, useEffect} from 'react';
 import {Box} from '@mui/material';
 import DialogWithTitle from '../DialogWithTitle';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
@@ -18,11 +18,15 @@ import ThemedButton from '../ThemedButton';
 
 const CreateItem = () => {
   const {title, name, image, str, bool, int, text, date} = useAppSelector(selectItem);
-  const [create] = useCreateItemMutation();
+  const [create, {isSuccess}] = useCreateItemMutation();
   const {token} = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const {lang} = useAppSelector(selectLang);
   const {itemPropTypes, id} = useAppSelector(selectCollection);
+
+  useEffect(() => {
+    dispatch(reset());
+  }, [isSuccess]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

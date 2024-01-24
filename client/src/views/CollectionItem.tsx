@@ -20,7 +20,7 @@ import {selectCollection, setData} from '../components/CreateCollection/redux/cr
 import {selectUser} from '../components/LoginUser/redux/userSlice/userSlice';
 import CreateItem from '../components/CreateItem/CreateItem';
 import ThemedButton from '../components/ThemedButton';
-import {setShow} from '../components/CreateItem/redux/createItemSlice';
+import {selectItem, setShow} from '../components/CreateItem/redux/createItemSlice';
 import AllItemsCollection from '../components/AllItemsCollection';
 
 const CollectionItem = () => {
@@ -34,10 +34,17 @@ const CollectionItem = () => {
   const {id: userId} = useAppSelector(selectUser);
   const navigate = useNavigate();
   const {title} = useAppSelector(selectCollection);
+  const {title: itemTitle} = useAppSelector(selectItem);
 
   useEffect(() => {
     getData({id});
   }, [id, title]);
+
+  useEffect(() => {
+    if (!itemTitle) {
+      getData({id});
+    }
+  }, [itemTitle]);
 
   useEffect(() => {
     if (isDeleteSuccess) {
