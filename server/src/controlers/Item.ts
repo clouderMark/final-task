@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {IAuthRequest} from 'src/types/types';
-import ItemModel from '../models/Item';
+import ItemModel from '../models/Item/Item';
 import AppError from '../errors/AppError';
 
 class Item {

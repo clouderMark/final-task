@@ -1,3 +1,4 @@
+import memoizee from 'memoizee';
 import {ERole, EField, IUserData, TEmail, TId, IOptions} from '../types/types';
 import {User as UserMapping} from './mapping';
 // import AppError from '../errors/AppError.js';
@@ -5,13 +6,22 @@ import {User as UserMapping} from './mapping';
 export const userAttributes = [EField.ID, EField.NAME, EField.ROLE, EField.ISBLOCKED];
 
 class User {
+  constructor() {
+    this.usersLength = memoizee(this.usersLength);
+  }
+
+  async usersLength() {
+    const length = await UserMapping.count();
+
+    return length;
+  }
+
   async getAll(options: IOptions) {
     const {limit, page} = options;
     const offset = page * limit;
-    const length = await UserMapping.count();
     const users = await UserMapping.findAll({offset, limit, attributes: userAttributes});
 
-    return {users, numberOfRecords: length};
+    return {users, numberOfRecords: await this.usersLength()};
   }
 
   async getOne(id: TId) {

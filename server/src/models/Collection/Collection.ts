@@ -1,5 +1,6 @@
 import sanitizeHtml from 'sanitize-html';
 import {UploadedFile} from 'express-fileupload';
+import memoizee from 'memoizee';
 import GoogleDriveService from '../../services/GoogleDriveService';
 import {EItemTypeProp, IOptions, TId} from '../../types/types';
 import {Collection as CollectionMapping, ItemPropType} from '../mapping';
@@ -8,11 +9,20 @@ import {allCollectionsAttributes, collectionInclude} from './value';
 import FileService from '../../services/FileService';
 
 class Collection {
+  constructor() {
+    this.collectionLength = memoizee(this.collectionLength);
+  }
+
+  async collectionLength(where: {userId: TId}) {
+    const length = await CollectionMapping.count({where});
+
+    return length;
+  }
+
   async getAll(options: IOptions, userId: TId) {
     const where = {userId};
     const {limit, page} = options;
     const offset = page * limit;
-    const length = await CollectionMapping.count({where});
     const collections = await CollectionMapping.findAll({
       offset,
       limit,
@@ -20,7 +30,7 @@ class Collection {
       where,
     });
 
-    return {collections, numberOfRecords: length};
+    return {collections, numberOfRecords: this.collectionLength(where)};
   }
 
   async getOne(id: TId) {
