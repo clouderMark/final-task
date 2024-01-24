@@ -45,13 +45,17 @@ const AllCollectionItems = () => {
               />
             ))}
           </Box>
-          <Pagination
-            count={Math.ceil(data.numberOfRecords / limit)}
-            showFirstButton
-            showLastButton
-            onChange={handlePageChange}
-            page={page}
-          />
+          {Math.ceil(data.numberOfRecords / limit) > 1 ? (
+            <Box sx={{display: 'flex', justifyContent: 'center'}}>
+              <Pagination
+                count={Math.ceil(data.numberOfRecords / limit)}
+                showFirstButton
+                showLastButton
+                onChange={handlePageChange}
+                page={page}
+              />
+            </Box>
+          ) : null}
         </Box>
       ) : (
         <ThemedTypography sx={{mt: 3}}>{content[lang].listIsEmty}</ThemedTypography>
